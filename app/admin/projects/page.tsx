@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Loading } from '@/components/ui/Loading';
-import { FolderKanban, Plus, Edit, Trash2, Users as UsersIcon, Eye } from 'lucide-react';
+import { FolderKanban, Plus, Edit, Trash2, Users as UsersIcon, Eye, UserPlus, UserMinus } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 import { formatDate, getDaysUntilDeadline } from '@/lib/utils';
@@ -19,6 +19,8 @@ export default function AdminProjectsPage() {
   const [showForm, setShowForm] = useState(false);
   const [editingProject, setEditingProject] = useState<ProjectResponse | null>(null);
   const [selectedFilter, setSelectedFilter] = useState<string>('ALL');
+  const [managingMembersFor, setManagingMembersFor] = useState<number | null>(null);
+  const [showAddMember, setShowAddMember] = useState<number | null>(null);
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ProjectRequest>();
 
@@ -103,6 +105,29 @@ export default function AdminProjectsPage() {
       loadData();
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'เกิดข้อผิดพลาด');
+    }
+  };
+
+  const handleAddMember = async (projectId: number, userId: number) => {
+    try {
+      await adminService.addMemberToProject(projectId, userId);
+      toast.success('เพิ่มสมาชิกสำเร็จ!');
+      await loadData();
+      setShowAddMember(null);
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'ไม่สามารถเพิ่มสมาชิกได้');
+    }
+  };
+
+  const handleRemoveMember = async (projectId: number, userId: number, userName: string) => {
+    if (!confirm(`ต้องการลบ ${userName} ออกจากโปรเจคหรือไม่?`)) return;
+
+    try {
+      await adminService.removeMemberFromProject(projectId, userId);
+      toast.success('ลบสมาชิกสำเร็จ!');
+      await loadData();
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || 'ไม่สามารถลบสมาชิกได้');
     }
   };
 
@@ -346,6 +371,93 @@ export default function AdminProjectsPage() {
                         </Button>
                       ))}
                     </div>
+                  </div>
+
+                  {/* Team Members Section */}
+                  <div className="pt-3 border-t">
+                    <div className="flex items-center justify-between mb-3">
+                      <p className="text-sm font-medium">สมาชิกในทีม ({project.members.length})</p>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setShowAddMember(showAddMember === project.id ? null : project.id)}
+                      >
+                        <UserPlus className="w-4 h-4 mr-1" />
+                        เพิ่มสมาชิก
+                      </Button>
+                    </div>
+
+                    {/* Add Member Section */}
+                    {showAddMember === project.id && (
+                      <div className="mb-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                        <p className="text-sm font-medium mb-2">เลือกสมาชิกใหม่</p>
+                        {(() => {
+                          const memberIds = project.members.map(m => m.id);
+                          const availableStudents = users.filter(u => !memberIds.includes(u.id) && u.role === 'STUDENT');
+
+                          if (availableStudents.length === 0) {
+                            return <p className="text-sm text-gray-600">ไม่มีนักเรียนที่สามารถเพิ่มได้</p>;
+                          }
+
+                          return (
+                            <div className="grid gap-2 max-h-40 overflow-y-auto">
+                              {availableStudents.map((student) => (
+                                <div
+                                  key={student.id}
+                                  className="flex items-center justify-between p-2 bg-white rounded border hover:border-blue-400"
+                                >
+                                  <div>
+                                    <p className="text-sm font-medium">{student.firstName}</p>
+                                    <p className="text-xs text-gray-600">
+                                      {student.customId} • {student.specialty}
+                                    </p>
+                                  </div>
+                                  <Button size="sm" onClick={() => handleAddMember(project.id, student.id)}>
+                                    เพิ่ม
+                                  </Button>
+                                </div>
+                              ))}
+                            </div>
+                          );
+                        })()}
+                      </div>
+                    )}
+
+                    {/* Current Members List */}
+                    {project.members.length === 0 ? (
+                      <p className="text-sm text-gray-500 text-center py-2">ยังไม่มีสมาชิกในทีม</p>
+                    ) : (
+                      <div className="grid gap-2">
+                        {project.members.map((member) => (
+                          <div
+                            key={member.id}
+                            className="flex items-center justify-between p-2 bg-gray-50 rounded-lg"
+                          >
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                                {member.firstName.charAt(0)}
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium">{member.firstName}</p>
+                                <p className="text-xs text-gray-600">{member.customId}</p>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">
+                                {member.specialty}
+                              </span>
+                              <Button
+                                variant="destructive"
+                                size="sm"
+                                onClick={() => handleRemoveMember(project.id, member.id, member.firstName)}
+                              >
+                                <UserMinus className="w-3 h-3" />
+                              </Button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   {/* Actions */}

@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST='{"app\\\\student\\\\profile\\\\page.tsx -> js-cookie":{"id":4046,"files":[]}}';

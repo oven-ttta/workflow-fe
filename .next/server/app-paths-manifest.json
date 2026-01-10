@@ -1,9 +1,18 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
   "/register/page": "app/register/page.js",
-  "/admin/users/page": "app/admin/users/page.js",
+  "/admin/projects/page": "app/admin/projects/page.js",
   "/admin/dashboard/page": "app/admin/dashboard/page.js",
-  "/student/page": "app/student/page.js",
   "/admin/page": "app/admin/page.js",
-  "/admin/projects/page": "app/admin/projects/page.js"
+  "/pm/projects/page": "app/pm/projects/page.js",
+  "/admin/users/page": "app/admin/users/page.js",
+  "/pm/projects/[id]/page": "app/pm/projects/[id]/page.js",
+  "/pm/students/page": "app/pm/students/page.js",
+  "/student/page": "app/student/page.js",
+  "/student/profile/page": "app/student/profile/page.js",
+  "/pm/page": "app/pm/page.js",
+  "/student/projects/page": "app/student/projects/page.js",
+  "/student/timetable/page": "app/student/timetable/page.js"
 }
