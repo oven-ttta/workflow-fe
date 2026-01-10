@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Loading } from '@/components/ui/Loading';
-import { Users, UserPlus, Edit, Trash2, Shield, Search, Calendar, X } from 'lucide-react';
+import { Users, UserPlus, Edit, Trash2, Shield, Search, Calendar, X, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
 
@@ -25,6 +25,8 @@ export default function AdminUsersPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRole, setSelectedRole] = useState<string>('ALL');
+  const [sortBy, setSortBy] = useState<string>('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [showTimetable, setShowTimetable] = useState(false);
@@ -40,7 +42,7 @@ export default function AdminUsersPage() {
 
   useEffect(() => {
     filterUsers();
-  }, [searchTerm, selectedRole, users]);
+  }, [searchTerm, selectedRole, users, sortBy, sortOrder]);
 
   const loadUsers = async () => {
     try {
@@ -68,6 +70,19 @@ export default function AdminUsersPage() {
         u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
         u.customId.toLowerCase().includes(searchTerm.toLowerCase())
       );
+    }
+
+    // Apply sorting
+    if (sortBy === 'name') {
+      filtered = [...filtered].sort((a, b) => {
+        const nameA = a.firstName.toLowerCase();
+        const nameB = b.firstName.toLowerCase();
+        if (sortOrder === 'asc') {
+          return nameA.localeCompare(nameB);
+        } else {
+          return nameB.localeCompare(nameA);
+        }
+      });
     }
 
     setFilteredUsers(filtered);
@@ -268,6 +283,42 @@ export default function AdminUsersPage() {
                   {role === 'ALL' ? 'ทั้งหมด' : role} ({count})
                 </Button>
               ))}
+            </div>
+          </div>
+
+          <div>
+            <label className="text-sm font-medium mb-2 block">เรียงลำดับ</label>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                variant={sortBy === '' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSortBy('')}
+              >
+                <ArrowUpDown className="w-4 h-4 mr-2" />
+                ค่าเริ่มต้น
+              </Button>
+              <Button
+                variant={sortBy === 'name' && sortOrder === 'asc' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => {
+                  setSortBy('name');
+                  setSortOrder('asc');
+                }}
+              >
+                <ArrowUp className="w-4 h-4 mr-2" />
+                ชื่อ (A-Z)
+              </Button>
+              <Button
+                variant={sortBy === 'name' && sortOrder === 'desc' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => {
+                  setSortBy('name');
+                  setSortOrder('desc');
+                }}
+              >
+                <ArrowDown className="w-4 h-4 mr-2" />
+                ชื่อ (Z-A)
+              </Button>
             </div>
           </div>
         </CardContent>
