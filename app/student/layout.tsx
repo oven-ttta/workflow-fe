@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { authService } from '@/lib/auth.service';
 import { Navbar } from '@/components/Navbar';
 
@@ -11,15 +11,22 @@ export default function StudentLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const user = authService.getCurrentUser();
     if (!user) {
       router.push('/login');
     } else if (user.role !== 'STUDENT') {
-      router.push(`/${user.role.toLowerCase()}`);
+      // อนุญาตให้ PM และ ADMIN เข้าถึงหน้า profile ได้
+      const isProfilePage = pathname === '/student/profile';
+      const allowedRoles = ['PM', 'ADMIN'];
+
+      if (!(isProfilePage && allowedRoles.includes(user.role))) {
+        router.push(`/${user.role.toLowerCase()}`);
+      }
     }
-  }, [router]);
+  }, [router, pathname]);
 
   return (
     <div className="min-h-screen bg-gray-50">
