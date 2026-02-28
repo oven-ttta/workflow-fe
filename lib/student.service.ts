@@ -13,14 +13,39 @@ export const studentService = {
   },
 
   async uploadTimetable(file: File): Promise<TimetableResponse> {
-    const formData = new FormData();
-    formData.append('file', file);
-    const response = await api.post<TimetableResponse>('/student/timetable/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return response.data;
+    // Try presigned upload flow: request presigned PUT URL, upload to MinIO directly,
+    // then notify backend to parse and persist. If presign not available, fallback to legacy upload.
+    try {
+      const presignResp = await api.post<{ url: string; objectName: string }>('/student/timetable/presign', {
+        fileName: file.name,
+      });
+      const { url, objectName } = presignResp.data;
+
+      // Upload file directly to MinIO using presigned URL
+      await fetch(url, {
+        method: 'PUT',
+        body: file,
+        headers: {
+          'Content-Type': file.type || 'application/octet-stream',
+        },
+      });
+
+      // Notify backend to parse the uploaded object and return parsed timetable
+      const notifyResp = await api.post<TimetableResponse>('/student/timetable/notify', {
+        objectName,
+      });
+      return notifyResp.data;
+    } catch (err) {
+      // Fallback: direct multipart upload to backend
+      const formData = new FormData();
+      formData.append('file', file);
+      const response = await api.post<TimetableResponse>('/student/timetable/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      return response.data;
+    }
   },
 
   async getTimetable(): Promise<TimetableResponse> {
