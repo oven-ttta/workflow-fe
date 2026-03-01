@@ -94,7 +94,7 @@ export default function ProfilePage() {
 
       <div className="grid gap-6 md:grid-cols-3">
         {/* Profile Info Card */}
-        <Card className="md:col-span-1">
+        <Card className="md:col-span-1 shadow-lg shadow-gray-300/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <UserIcon className="w-5 h-5" />
@@ -103,7 +103,7 @@ export default function ProfilePage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex flex-col items-center text-center space-y-4">
-              <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center">
+              <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
                 <UserIcon className="w-12 h-12 text-white" />
               </div>
               <div>
@@ -123,7 +123,7 @@ export default function ProfilePage() {
               </div>
               <div>
                 <p className="text-xs text-gray-500 mb-1">ความถนัด</p>
-                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                <span className="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
                   {profile?.specialty}
                 </span>
               </div>
@@ -131,7 +131,7 @@ export default function ProfilePage() {
                 <p className="text-xs text-gray-500 mb-1">สถานะ</p>
                 <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
                   profile?.isActive 
-                    ? 'bg-green-100 text-green-800' 
+                    ? 'bg-green-200 text-green-800' 
                     : 'bg-red-100 text-red-800'
                 }`}>
                   {profile?.isActive ? 'ใช้งานอยู่' : 'ระงับ'}
@@ -139,7 +139,7 @@ export default function ProfilePage() {
               </div>
               <div>
                 <p className="text-xs text-gray-500 mb-1">บทบาท</p>
-                <span className="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+                <span className="inline-block px-3 py-1 bg-purple-100 text-blue-800 rounded-full text-sm font-medium">
                   {profile?.role}
                 </span>
               </div>
@@ -159,7 +159,7 @@ export default function ProfilePage() {
         </Card>
 
         {/* Edit Form Card */}
-        <Card className="md:col-span-2">
+        <Card className="md:col-span-2 shadow-lg shadow-gray-300/50">
           <CardHeader>
             <CardTitle>แก้ไขข้อมูล</CardTitle>
             <CardDescription>
@@ -169,9 +169,9 @@ export default function ProfilePage() {
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {/* Warning Alert */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex gap-3">
-                <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                <div className="text-sm text-blue-800">
+              <div className="bg-orange-100 border border-blue-200 rounded-lg p-4 flex gap-3">
+                <Info className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
+                <div className="text-sm text-black-800">
                   <p className="font-medium mb-1">คำแนะนำ:</p>
                   <ul className="list-disc list-inside space-y-1">
                     <li>กรอกรหัสผ่านเพื่อยืนยันการแก้ไขข้อมูล</li>
@@ -280,7 +280,7 @@ export default function ProfilePage() {
               <div className="flex gap-3 pt-4 border-t">
                 <Button
                   type="submit"
-                  className="flex-1"
+                  className="flex-1 bg-orange-500 hover:bg-orange-600 shadow-lg shadow-orange-500/50 rounded-lg"
                   disabled={isSaving}
                 >
                   <Save className="w-4 h-4 mr-2" />
@@ -310,17 +310,17 @@ export default function ProfilePage() {
       </div>
 
       {/* Additional Info Card */}
-      <Card>
+      <Card className="shadow-lg shadow-gray-300/50">
         <CardHeader>
           <CardTitle>ข้อมูลเพิ่มเติม</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4 md:grid-cols-2">
-            <div className="p-4 bg-gray-50 rounded-lg">
+            <div className="p-4 bg-orange-100 rounded-lg">
               <p className="text-sm text-gray-600 mb-1">รหัสนักเรียน</p>
               <p className="font-mono font-semibold text-lg">{profile?.customId}</p>
             </div>
-            <div className="p-4 bg-gray-50 rounded-lg">
+            <div className="p-4 bg-orange-100 rounded-lg">
               <p className="text-sm text-gray-600 mb-1">อัพเดตล่าสุด</p>
               <p className="font-medium">
                 {profile?.updatedAt && new Date(profile.updatedAt).toLocaleDateString('th-TH', {
