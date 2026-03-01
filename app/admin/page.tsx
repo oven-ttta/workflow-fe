@@ -58,7 +58,7 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
         <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">โปรเจคทั้งหมด</CardTitle>
+            <CardTitle className="text-sm font-medium">รายการโปรเจคทั้งหมด</CardTitle>
             <FolderKanban className="h-4 w-4" />
           </CardHeader>
           <CardContent>
