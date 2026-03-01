@@ -35,7 +35,7 @@ export default function StudentProjectsPage() {
 
       {projects.length === 0 ? (
         <Card>
-          <CardContent className="text-center py-12">
+          <CardContent className="text-center py-12 shadow-lg shadow-gray-300-50 rounded-lg">
             <FolderKanban className="w-16 h-16 mx-auto mb-4 text-gray-400" />
             <p className="text-gray-600">คุณยังไม่มีโปรเจคที่เข้าร่วม</p>
           </CardContent>

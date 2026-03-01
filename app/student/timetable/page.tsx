@@ -79,7 +79,7 @@ export default function TimetablePage() {
             className="hidden"
             disabled={isUploading}
           />
-          <Button
+          <Button className='bg-orange-500 hover:bg-orange-600 shadow-lg shadow-orange-500/50 rounded-lg'
             onClick={() => document.getElementById('timetable-upload')?.click()}
             disabled={isUploading}
           >
@@ -91,12 +91,12 @@ export default function TimetablePage() {
 
       {!timetable || timetable.slots.length === 0 ? (
         <Card>
-          <CardContent className="text-center py-12">
+          <CardContent className="text-center py-12 shadow-lg shadow-gray-300">
             <Calendar className="w-16 h-16 mx-auto mb-4 text-gray-400" />
             <p className="text-gray-600 mb-4">
               คุณยังไม่มีตารางเรียน กรุณาอัพโหลดรูปตารางเรียนของคุณ
             </p>
-            <Button
+            <Button className='bg-orange-500 hover:bg-orange-600 shadow-lg shadow-orange-500/50 rounded-lg'
               onClick={() => document.getElementById('timetable-upload')?.click()}
               disabled={isUploading}
             >

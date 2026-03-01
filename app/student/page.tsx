@@ -40,18 +40,18 @@ export default function StudentDashboard() {
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white rounded-lg shadow p-6 shadow-gray-500/50 rounded-lg">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          สวัสดี, {currentUser?.firstName}! 👋
+          ยินดีต้อนรับ {currentUser?.firstName}! 👋
         </h1>
         <p className="text-gray-600">
-          รหัสนักเรียน: <span className="font-semibold">{currentUser?.customId}</span>
+          Your code : <span className="font-semibold">{currentUser?.customId}</span>
         </p>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6  ">
+        <Card className="shadow-gray-500/50 rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">โปรเจคทั้งหมด</CardTitle>
             <FolderKanban className="h-4 w-4 text-muted-foreground" />
@@ -62,7 +62,7 @@ export default function StudentDashboard() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="shadow-gray-500/50 rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">โปรเจคที่กำลังทำ</CardTitle>
             <Calendar className="h-4 w-4 text-muted-foreground" />
@@ -75,7 +75,7 @@ export default function StudentDashboard() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="shadow-gray-500/50 rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">ความถนัด</CardTitle>
             <Award className="h-4 w-4 text-muted-foreground" />
@@ -88,25 +88,25 @@ export default function StudentDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <Card>
+      <Card className="shadow-gray-500/50 rounded-lg">
         <CardHeader>
           <CardTitle>เมนูด่วน</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Link href="/student/timetable">
+            <Link href="/student/timetable" className='shadow-lg shadow-gray-300/50'>
               <Button variant="outline" className="w-full h-20 flex flex-col items-center justify-center">
                 <Calendar className="h-6 w-6 mb-2" />
                 <span>จัดการตารางเรียน</span>
               </Button>
             </Link>
-            <Link href="/student/projects">
+            <Link href="/student/projects" className='shadow-lg shadow-gray-300/50'>
               <Button variant="outline" className="w-full h-20 flex flex-col items-center justify-center">
                 <FolderKanban className="h-6 w-6 mb-2" />
                 <span>ดูโปรเจค</span>
               </Button>
             </Link>
-            <Link href="/student/profile">
+            <Link href="/student/profile" className='shadow-lg shadow-gray-300/50'>
               <Button variant="outline" className="w-full h-20 flex flex-col items-center justify-center">
                 <UserIcon className="h-6 w-6 mb-2" />
                 <span>แก้ไขโปรไฟล์</span>
@@ -117,7 +117,7 @@ export default function StudentDashboard() {
       </Card>
 
       {/* Recent Projects */}
-      <Card>
+      <Card className="shadow-gray-500/50 rounded-lg">
         <CardHeader>
           <CardTitle>โปรเจคล่าสุด</CardTitle>
         </CardHeader>

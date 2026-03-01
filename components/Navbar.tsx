@@ -58,7 +58,7 @@ export function Navbar() {
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
-              <Link href={`/${user.role.toLowerCase()}`} className="text-xl font-bold text-primary">
+              <Link href={`/${user.role.toLowerCase()}`} className="text-2xl font-bold text-orange-600">
                 Student Part-time
               </Link>
             </div>
@@ -72,7 +72,7 @@ export function Navbar() {
                     href={item.href}
                     className={`inline-flex items-center px-3 py-2 text-sm font-medium rounded-md ${
                       isActive
-                        ? 'bg-primary text-white'
+                        ? 'bg-orange-600 text-white'
                         : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
@@ -90,7 +90,7 @@ export function Navbar() {
                 {user.customId} - {user.role}
               </p>
             </div>
-            <Button variant="outline" size="sm" onClick={handleLogout}>
+            <Button className='shadow p-5 shadow-gray-500/50 rounded-lg' variant="outline" size="sm" onClick={handleLogout}>
               <LogOut className="w-4 h-4 mr-2" />
               ออกจากระบบ
             </Button>
