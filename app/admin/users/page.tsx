@@ -254,7 +254,7 @@ export default function AdminUsersPage() {
       </div>
 
       {/* Filters */}
-      <Card>
+      <Card className="shadow-lg shadow-gray-300/50 rounded-lg">
         <CardHeader>
           <CardTitle>ค้นหาและกรอง</CardTitle>
         </CardHeader>
@@ -376,7 +376,7 @@ export default function AdminUsersPage() {
       )}
 
       {/* Users List */}
-      <Card>
+      <Card className="shadow-lg shadow-gray-300/50 rounded-lg">
         <CardHeader>
           <CardTitle>รายชื่อผู้ใช้ ({filteredUsers.length})</CardTitle>
         </CardHeader>

@@ -29,9 +29,9 @@ export default function StudentLayout({
   }, [router, pathname]);
 
   return (
-    <div className="min-h-screen bg-orange-200">
+    <div className="min-h-screen bg-gradient-to-br from-orange-500 to-yellow-200">
       <Navbar />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-white shadow-lg shadow-gray-500/50 rounded-lg m-5 mt-2">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-white shadow-lg shadow-gray-500/50 rounded-lg m-5 mt-2 ">
         {children}
       </main>
     </div>
