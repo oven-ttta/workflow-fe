@@ -39,11 +39,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-200 to-indigo-100 p-4 ">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <div className="flex items-center justify-center mb-4">
-            <LogIn className="h-12 w-12 text-primary" />
+            <LogIn className="h-12 w-12 text-orange-500" />
           </div>
           <CardTitle className="text-2xl text-center">เข้าสู่ระบบ</CardTitle>
           <CardDescription className="text-center">
@@ -77,7 +77,7 @@ export default function LoginPage() {
               )}
             </div>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600 text-white shadow-gray-400" disabled={isLoading}>
               {isLoading ? 'กำลังเข้าสู่ระบบ...' : 'เข้าสู่ระบบ'}
             </Button>
 
