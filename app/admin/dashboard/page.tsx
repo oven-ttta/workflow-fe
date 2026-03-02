@@ -126,7 +126,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Status Breakdown */}
-      <Card>
+      <Card className="shadow-lg shadow-gray-300/50 rounded-lg">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <BarChart3 className="w-5 h-5" />
@@ -345,7 +345,7 @@ export default function AdminDashboardPage() {
       </Card>
 
       {/* Quick Actions */}
-      <Card>
+      <Card className="shadow-lg shadow-gray-300/50 rounded-lg">
         <CardHeader>
           <CardTitle>เครื่องมือจัดการ</CardTitle>
         </CardHeader>

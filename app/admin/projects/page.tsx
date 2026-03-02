@@ -152,7 +152,7 @@ export default function AdminProjectsPage() {
           <h1 className="text-3xl font-bold">จัดการโปรเจค</h1>
           <p className="text-gray-600 mt-1">สร้างและจัดการโปรเจคทั้งหมด</p>
         </div>
-        <Button onClick={handleCreate}>
+        <Button className='bg-blue-500 shadow-lg shadow-gray-400/50' onClick={handleCreate}>
           <Plus className="w-4 h-4 mr-2" />
           สร้างโปรเจคใหม่
         </Button>
@@ -160,7 +160,7 @@ export default function AdminProjectsPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-7 gap-3">
-        <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+        <Card className="bg-gradient-to-br from-orange-500 to-yellow-500 text-white shadow-lg shadow-gray-400/50 rounded-lg">
           <CardContent className="pt-4 text-center">
             <p className="text-2xl font-bold">{projects.length}</p>
             <p className="text-xs text-blue-100">ทั้งหมด</p>
@@ -177,10 +177,10 @@ export default function AdminProjectsPage() {
       </div>
 
       {/* Filters */}
-      <Card>
+      <Card className='shadow-lg shadow-gray-300/50 rounded-lg'>
         <CardContent className="pt-6">
           <div className="flex flex-wrap gap-2">
-            <Button
+            <Button className='bg-gradient-to-br from-orange-500 to-yellow-500 shadow-lg shadow-gray-400/50'
               variant={selectedFilter === 'ALL' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setSelectedFilter('ALL')}
@@ -298,9 +298,9 @@ export default function AdminProjectsPage() {
       {/* Projects List */}
       <div className="grid gap-4">
         {filteredProjects.length === 0 ? (
-          <Card>
+          <Card className='shadow-lg shadow-gray-300/50 rounded-lg'>
             <CardContent className="text-center py-12">
-              <FolderKanban className="w-16 h-16 mx-auto mb-4 text-gray-400" />
+              <FolderKanban className="w-16 h-16 mx-auto mb-4 text-orange-500" />
               <p className="text-gray-600">ไม่พบโปรเจค</p>
             </CardContent>
           </Card>

@@ -43,11 +43,11 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 ">
       {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg shadow-lg p-6 text-white">
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white shadow-lg shadow-gray-500/50 rounded-lg">
         <h1 className="text-3xl font-bold mb-2">
-          Admin Dashboard 🎛️
+          Admin Dashboard 🔒
         </h1>
         <p className="text-blue-100">
           ภาพรวมระบบจัดการน้องนักเรียน Part-time
@@ -56,7 +56,7 @@ export default function AdminDashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
-        <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+        <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg shadow-gray-500/50 rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">รายการโปรเจคทั้งหมด</CardTitle>
             <FolderKanban className="h-4 w-4" />
@@ -67,7 +67,7 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white">
+        <Card className="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white shadow-lg shadow-gray-500/50 rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">ใกล้ Deadline</CardTitle>
             <Clock className="h-4 w-4" />
@@ -78,7 +78,7 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-red-500 to-red-600 text-white">
+        <Card className="bg-gradient-to-br from-red-500 to-red-600 text-white shadow-lg shadow-gray-500/50 rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">เลย Deadline</CardTitle>
             <AlertCircle className="h-4 w-4" />
@@ -89,7 +89,7 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white">
+        <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg shadow-gray-500/50 rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">ต้องการช่วยเหลือ</CardTitle>
             <AlertCircle className="h-4 w-4" />
@@ -100,7 +100,7 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white">
+        <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-lg shadow-gray-500/50 rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">กำลังดำเนินการ</CardTitle>
             <TrendingUp className="h-4 w-4" />
@@ -111,7 +111,7 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white">
+        <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white shadow-lg shadow-gray-500/50 rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">เสร็จสมบูรณ์</CardTitle>
             <CheckCircle className="h-4 w-4" />
@@ -128,27 +128,27 @@ export default function AdminDashboard() {
         <CardHeader>
           <CardTitle>เมนูด่วน</CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Link href="/admin/projects">
+        <CardContent className='shadow-lg shadow-gray-300/50 rounded-lg'>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 ">
+            <Link className='shadow-lg shadow-gray-300/50 rounded-lg' href="/admin/projects">
               <Button variant="outline" className="w-full h-24 flex flex-col items-center justify-center gap-2">
                 <FolderKanban className="h-8 w-8 text-blue-600" />
                 <span className="font-medium">จัดการโปรเจค</span>
               </Button>
             </Link>
-            <Link href="/admin/users">
+            <Link className='shadow-lg shadow-gray-300/50 rounded-lg' href="/admin/users">
               <Button variant="outline" className="w-full h-24 flex flex-col items-center justify-center gap-2">
                 <Users className="h-8 w-8 text-purple-600" />
                 <span className="font-medium">จัดการผู้ใช้</span>
               </Button>
             </Link>
-            <Link href="/admin/dashboard">
+            <Link className='shadow-lg shadow-gray-300/50 rounded-lg' href="/admin/dashboard">
               <Button variant="outline" className="w-full h-24 flex flex-col items-center justify-center gap-2">
                 <TrendingUp className="h-8 w-8 text-green-600" />
                 <span className="font-medium">รายงานสรุป</span>
               </Button>
             </Link>
-            <Link href="/student/profile">
+            <Link className='shadow-lg shadow-gray-300/50 rounded-lg' href="/student/profile">
               <Button variant="outline" className="w-full h-24 flex flex-col items-center justify-center gap-2">
                 <Users className="h-8 w-8 text-gray-600" />
                 <span className="font-medium">โปรไฟล์</span>
