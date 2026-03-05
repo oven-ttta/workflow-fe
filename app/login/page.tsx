@@ -47,7 +47,7 @@ export default function LoginPage() {
           </div>
           <CardTitle className="text-2xl text-center">เข้าสู่ระบบ</CardTitle>
           <CardDescription className="text-center">
-            ระบบจัดการน้องนักเรียน Part-time
+            ระบบจัดการ workflow สำหรับนักเรียน/นักศึกษา
           </CardDescription>
         </CardHeader>
         <CardContent>
