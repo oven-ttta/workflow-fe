@@ -31,15 +31,15 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-500 to-indigo-100 p-4">
+      <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="space-y-1">
           <div className="flex items-center justify-center mb-4">
-            <UserPlus className="h-12 w-12 text-primary" />
+            <UserPlus className="h-12 w-12 text-orange-500" />
           </div>
           <CardTitle className="text-2xl text-center">ลงทะเบียน</CardTitle>
           <CardDescription className="text-center">
-            สร้างบัญชีใหม่สำหรับนักเรียน Part-time
+            สร้างบัญชีใหม่สำหรับระบบจัดการ workflow ของคุณ
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -115,7 +115,7 @@ export default function RegisterPage() {
               )}
             </div>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600" disabled={isLoading}>
               {isLoading ? 'กำลังลงทะเบียน...' : 'ลงทะเบียน'}
             </Button>
 
