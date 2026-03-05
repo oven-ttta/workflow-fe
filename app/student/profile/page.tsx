@@ -86,7 +86,7 @@ export default function ProfilePage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className=" mx-auto space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
       <div>
         <h1 className="text-3xl font-bold">โปรไฟล์</h1>
         <p className="text-gray-600 mt-1">จัดการข้อมูลส่วนตัวของคุณ</p>

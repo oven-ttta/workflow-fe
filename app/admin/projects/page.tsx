@@ -145,7 +145,7 @@ export default function AdminProjectsPage() {
   }, {} as Record<string, number>);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>

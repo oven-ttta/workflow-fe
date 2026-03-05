@@ -31,7 +31,7 @@ export default function PMProjectsPage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">โปรเจคที่ดูแล</h1>
@@ -46,7 +46,7 @@ export default function PMProjectsPage() {
       {projects.length === 0 ? (
         <Card>
           <CardContent className="text-center py-12">
-            <FolderKanban className="w-16 h-16 mx-auto mb-4 text-gray-400" />
+            <FolderKanban className="w-16 h-16 mx-auto mb-4 text-orange-500" />
             <p className="text-gray-600">คุณยังไม่มีโปรเจคที่ต้องดูแล</p>
           </CardContent>
         </Card>

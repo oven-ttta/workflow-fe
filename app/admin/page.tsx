@@ -43,7 +43,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="space-y-6 ">
+    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
       {/* Welcome Section */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white shadow-lg shadow-gray-500/50 rounded-lg">
         <h1 className="text-3xl font-bold mb-2">
