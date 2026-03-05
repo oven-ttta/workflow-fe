@@ -45,11 +45,11 @@ export default function PMDashboard() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
       {/* Welcome Section */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white rounded-lg shadow p-6 shadow-gray-400/50">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          สวัสดี, {currentUser?.firstName}! 👨‍💼
+          ยินดีต้อนรับ {currentUser?.firstName}! 👨‍💼
         </h1>
         <p className="text-gray-600">
           คุณกำลังดูแล <span className="font-semibold">{projects.length}</span> โปรเจค
@@ -58,7 +58,7 @@ export default function PMDashboard() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <Card>
+        <Card className='shadow-gray-400/50'>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">โปรเจคทั้งหมด</CardTitle>
             <FolderKanban className="h-4 w-4 text-muted-foreground" />
@@ -69,7 +69,7 @@ export default function PMDashboard() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className='shadow-gray-400/50'>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">กำลังดำเนินการ</CardTitle>
             <Clock className="h-4 w-4 text-blue-600" />
@@ -80,7 +80,7 @@ export default function PMDashboard() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className='shadow-gray-400/50'>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">ใกล้ Deadline</CardTitle>
             <AlertCircle className="h-4 w-4 text-yellow-600" />
@@ -91,7 +91,7 @@ export default function PMDashboard() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className='shadow-gray-400/50'>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">ต้องการความช่วยเหลือ</CardTitle>
             <AlertCircle className="h-4 w-4 text-red-600" />
@@ -102,7 +102,7 @@ export default function PMDashboard() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className='shadow-gray-400/50'>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">เสร็จสมบูรณ์</CardTitle>
             <CheckCircle className="h-4 w-4 text-green-600" />
@@ -115,7 +115,7 @@ export default function PMDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <Card>
+      <Card className='shadow-gray-400/50'>
         <CardHeader>
           <CardTitle>เมนูด่วน</CardTitle>
         </CardHeader>
@@ -144,14 +144,14 @@ export default function PMDashboard() {
       </Card>
 
       {/* Projects List */}
-      <Card>
+      <Card className='shadow-gray-400/50'>
         <CardHeader>
           <CardTitle>โปรเจคที่ดูแล</CardTitle>
         </CardHeader>
         <CardContent>
           {projects.length === 0 ? (
             <div className="text-center py-12">
-              <FolderKanban className="w-16 h-16 mx-auto mb-4 text-gray-400" />
+              <FolderKanban className="w-16 h-16 mx-auto mb-4 text-orange-500" />
               <p className="text-gray-600">คุณยังไม่มีโปรเจคที่ต้องดูแล</p>
             </div>
           ) : (

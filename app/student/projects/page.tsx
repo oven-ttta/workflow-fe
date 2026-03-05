@@ -30,7 +30,7 @@ export default function StudentProjectsPage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
       <h1 className="text-3xl font-bold">โปรเจคของฉัน</h1>
 
       {projects.length === 0 ? (

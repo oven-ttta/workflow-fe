@@ -67,7 +67,7 @@ export default function TimetablePage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">ตารางเรียน</h1>
         <div>

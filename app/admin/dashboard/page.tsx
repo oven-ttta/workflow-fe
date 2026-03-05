@@ -62,7 +62,7 @@ export default function AdminDashboardPage() {
     : 0;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
       {/* Header */}
       <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg shadow-lg p-6 text-white">
         <div className="flex items-center justify-between">
@@ -186,7 +186,7 @@ export default function AdminDashboardPage() {
       {/* Critical Alerts Grid */}
       <div className="grid md:grid-cols-2 gap-6">
         {/* Projects Needing Help */}
-        <Card className="border-red-200 bg-red-50">
+        <Card className="border-red-200 bg-white">
           <CardHeader>
             <CardTitle className="text-red-800 flex items-center gap-2">
               <AlertCircle className="w-5 h-5" />
@@ -233,7 +233,7 @@ export default function AdminDashboardPage() {
         </Card>
 
         {/* Overdue Projects */}
-        <Card className="border-orange-200 bg-orange-50">
+        <Card className="border-orange-200 bg-white">
           <CardHeader>
             <CardTitle className="text-orange-800 flex items-center gap-2">
               <Clock className="w-5 h-5" />
@@ -288,7 +288,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Projects Due Soon */}
-      <Card className="border-yellow-200 bg-yellow-50">
+      <Card className="border-yellow-200 bg-white">
         <CardHeader>
           <CardTitle className="text-yellow-800 flex items-center gap-2">
             <Clock className="w-5 h-5" />

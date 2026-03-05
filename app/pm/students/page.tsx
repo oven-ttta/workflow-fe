@@ -123,7 +123,7 @@ export default function PMStudentsPage() {
   }, {} as Record<string, number>);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold">รายชื่อนักเรียน</h1>
@@ -132,10 +132,10 @@ export default function PMStudentsPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card>
+        <Card className='shadow-gray-400/50'>
           <CardContent className="pt-6">
             <div className="text-center">
-              <Users className="w-8 h-8 mx-auto mb-2 text-blue-600" />
+              <Users className="w-8 h-8 mx-auto mb-2 text-orange-600" />
               <p className="text-2xl font-bold">{students.length}</p>
               <p className="text-sm text-gray-600">นักเรียนทั้งหมด</p>
             </div>
@@ -143,10 +143,10 @@ export default function PMStudentsPage() {
         </Card>
         
         {['Frontend', 'Backend', 'UX/UI'].map((specialty) => (
-          <Card key={specialty}>
+          <Card key={specialty} className='shadow-gray-400/50'>
             <CardContent className="pt-6">
               <div className="text-center">
-                <p className="text-2xl font-bold text-purple-600">
+                <p className="text-2xl font-bold text-orange-600">
                   {specialtyCounts[specialty] || 0}
                 </p>
                 <p className="text-sm text-gray-600">{specialty}</p>
@@ -157,7 +157,7 @@ export default function PMStudentsPage() {
       </div>
 
       {/* Filters */}
-      <Card>
+      <Card className='shadow-gray-400/50'>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Filter className="w-5 h-5" />
@@ -182,6 +182,7 @@ export default function PMStudentsPage() {
             <label className="text-sm font-medium mb-2 block">กรองตามความถนัด</label>
             <div className="flex flex-wrap gap-2">
               <Button
+              className='bg-orange-500 hover:bg-orange-600 shadow-gray-400/50'
                 variant={selectedSpecialty === 'ALL' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => handleSpecialtyFilter('ALL')}
@@ -223,7 +224,7 @@ export default function PMStudentsPage() {
                   className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
                       {student.firstName.charAt(0)}
                     </div>
                     <div>
