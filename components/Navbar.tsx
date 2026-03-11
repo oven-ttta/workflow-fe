@@ -1,10 +1,11 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { authService } from '@/lib/auth.service';
 import { Button } from './ui/Button';
-import { LogOut, User, Home, FolderKanban, Users, LayoutDashboard } from 'lucide-react';
+import { User, Home, FolderKanban, Users, LayoutDashboard, UserIcon, LogOutIcon } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export function Navbar() {
@@ -53,13 +54,13 @@ export function Navbar() {
   }
 
   return (
-    <nav className="bg-white shadow-sm border-b">
+    <nav className="bg-[#fcc360] shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link href={`/${user.role.toLowerCase()}`} className="text-2xl font-bold text-orange-600">
-                Student Part-time
+                <Image src="/logo.svg" alt="Logo" width={40} height={40} />
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-4">
@@ -70,11 +71,10 @@ export function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`inline-flex items-center px-3 py-2 text-sm font-medium rounded-md ${
-                      isActive
-                        ? 'bg-orange-600 text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
-                    }`}
+                    className={`inline-flex items-center px-3 py-2 text-sm font-medium rounded-md m-2 ${isActive
+                        ? 'text-black border border-black'
+                        : 'text-black hover:border-black hover:border'
+                      }`}
                   >
                     <Icon className="w-4 h-4 mr-2" />
                     {item.label}
@@ -84,15 +84,14 @@ export function Navbar() {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="text-sm">
+            <div className="flex text-sm justify-items-center items-center space-x-2">
               <p className="font-medium">{user.firstName}</p>
-              <p className="text-gray-500 text-xs">
-                {user.customId} - {user.role}
-              </p>
+
+              <Image src="./user-profile-icon.svg" alt="Avatar" width={32} height={32} className="rounded-full" />
             </div>
-            <Button className='shadow p-5 shadow-gray-500/50 rounded-lg' variant="outline" size="sm" onClick={handleLogout}>
-              <LogOut className="w-4 h-4 mr-2" />
-              ออกจากระบบ
+
+            <Button className='bg-transparent hover:bg-red-500' size="sm" onClick={handleLogout}>
+              <LogOutIcon size={16} color="#ff0000" />
             </Button>
           </div>
         </div>
