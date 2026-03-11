@@ -22,7 +22,7 @@ export default function PMLayout({
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-[]">
+    <div className="min-h-screen bg-[#ffffff]">
       <Navbar />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-[#FFF3D0] rounded-lg m-3 shadow-lg shadow-gray-300/50">
         {children}
