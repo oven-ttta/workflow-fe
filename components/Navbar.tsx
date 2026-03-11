@@ -5,13 +5,19 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { authService } from '@/lib/auth.service';
 import { Button } from './ui/Button';
-import { User, Home, FolderKanban, Users, LayoutDashboard, UserIcon, LogOutIcon } from 'lucide-react';
+import { User as UserIcon, Home, FolderKanban, Users, LayoutDashboard, LogOutIcon } from 'lucide-react';
+import { AuthResponse } from '@/lib/types';
 import toast from 'react-hot-toast';
+import { useEffect, useState } from 'react';
 
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  const user = authService.getCurrentUser();
+  const [user, setUser] = useState<AuthResponse | null>(null);
+
+  useEffect(() => {
+    setUser(authService.getCurrentUser()); // ← โหลดเฉพาะ client
+  }, []);
 
   const handleLogout = () => {
     authService.logout();
@@ -29,7 +35,7 @@ export function Navbar() {
       { href: '/student', label: 'หน้าหลัก', icon: Home },
       { href: '/student/timetable', label: 'ตารางเรียน', icon: LayoutDashboard },
       { href: '/student/projects', label: 'โปรเจคของฉัน', icon: FolderKanban },
-      { href: '/student/profile', label: 'โปรไฟล์', icon: User }
+      { href: '/student/profile', label: 'โปรไฟล์', icon: UserIcon }
     );
   }
 
@@ -39,7 +45,7 @@ export function Navbar() {
       { href: '/pm', label: 'หน้าหลัก', icon: Home },
       { href: '/pm/projects', label: 'โปรเจคที่ดูแล', icon: FolderKanban },
       { href: '/pm/students', label: 'รายชื่อนักเรียน', icon: Users },
-      { href: '/student/profile', label: 'โปรไฟล์', icon: User }
+      { href: '/student/profile', label: 'โปรไฟล์', icon: UserIcon }
     );
   }
 
@@ -72,8 +78,8 @@ export function Navbar() {
                     key={item.href}
                     href={item.href}
                     className={`inline-flex items-center px-3 py-2 text-sm font-medium rounded-md m-2 ${isActive
-                        ? 'text-black border border-black'
-                        : 'text-black hover:border-black hover:border'
+                      ? 'text-black border border-black'
+                      : 'text-black hover:border-black hover:border'
                       }`}
                   >
                     <Icon className="w-4 h-4 mr-2" />
