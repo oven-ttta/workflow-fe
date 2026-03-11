@@ -109,8 +109,8 @@ export default function ProfilePage() {
                 <UserIcon size={64} />
               </div>
               <div className="text-center">
-                <h3 className="text-2xl font-black italic uppercase">{profile?.firstName || 'XX'}</h3>
-                <p className="text-gray-500 tracking-widest text-xs">{profile?.customId || 'XXXXXXX'}</p>
+                <h3 className="text-2xl font-black italic uppercase">{profile?.firstName}</h3>
+                <p className="text-gray-500 tracking-widest text-xs">{profile?.customId}</p>
               </div>
             </div>
 
@@ -118,11 +118,11 @@ export default function ProfilePage() {
             <div className="space-y-4 border-t pt-6">
               <div className="flex  text-sm text-black/70">
                 <span className="text-gray-400 mr-[10px]">ชื่อผู้ใช้</span>
-                <span className="font-bold text-gray-700">{profile?.username || '-'}</span>
+                <span className="font-bold text-gray-700">{profile?.username}</span>
               </div>
               <div className="flex text-sm">
                 <span className="text-gray-400 mr-[10px]">ชั้นปี</span>
-                <span className="font-bold text-gray-700">{profile?.yearLevel || '-'}</span>
+                <span className="font-bold text-gray-700">{profile?.yearLevel}</span>
               </div>
 
               <div className="space-y-2">
