@@ -67,26 +67,48 @@ export default function TimetablePage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
+    <div className="space-y-6 bg-[#FCC360] p-6 rounded-lg shadow-md shadow-gray-500/50">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">ตารางเรียน</h1>
-        <div>
-          <input
-            type="file"
-            id="timetable-upload"
-            accept="image/*"
-            onChange={handleFileUpload}
-            className="hidden"
-            disabled={isUploading}
-          />
-          <Button className='bg-orange-500 hover:bg-orange-600 shadow-lg shadow-orange-500/50 rounded-lg'
-            onClick={() => document.getElementById('timetable-upload')?.click()}
-            disabled={isUploading}
-          >
-            <Upload className="w-4 h-4 mr-2" />
-            {isUploading ? 'กำลังอัพโหลด...' : 'อัพโหลดตารางเรียน'}
-          </Button>
-        </div>
+        <h1 className="text-3xl font-bold mt-4 mb-4">ตารางเรียน</h1>
+          <div className='flex gap-4'>
+            {/* แก้ไขตารางเรียน */}
+            <div>
+              <input
+                type="file"
+                id="timetable-upload"
+                accept="image/*"
+                onChange={handleFileUpload}
+                className="hidden"
+                disabled={isUploading}
+              />
+              <Button className='bg-[#ffffff] hover:bg-gray-200 text-[#000000] shadow-lg shadow-orange-500/50 rounded-lg h-[50px]'
+                onClick={() => document.getElementById('timetable-upload')?.click()}
+                disabled={isUploading}
+              >
+                <Upload className="w-4 h-4 mr-2" />
+                {isUploading ? 'กำลังอัพโหลด...' : 'แก้ไขตารางเรียน'}
+              </Button>
+            </div>
+            {/* อัพโหลดตารางเรียน */}
+            <div>
+              <input
+                type="file"
+                id="timetable-upload"
+                accept="image/*"
+                onChange={handleFileUpload}
+                className="hidden"
+                disabled={isUploading}
+              />
+              <Button className='bg-[#ffffff] hover:bg-gray-200 text-[#000000] shadow-lg shadow-orange-500/50 rounded-lg h-[50px]'
+                onClick={() => document.getElementById('timetable-upload')?.click()}
+                disabled={isUploading}
+              >
+                <Upload className="w-4 h-4 mr-2" />
+                {isUploading ? 'กำลังอัพโหลด...' : 'อัพโหลดตารางเรียน'}
+              </Button>
+            </div>
+          </div>
+        
       </div>
 
       {!timetable || timetable.slots.length === 0 ? (
@@ -96,13 +118,13 @@ export default function TimetablePage() {
             <p className="text-gray-600 mb-4">
               คุณยังไม่มีตารางเรียน กรุณาอัพโหลดรูปตารางเรียนของคุณ
             </p>
-            <Button className='bg-orange-500 hover:bg-orange-600 shadow-lg shadow-orange-500/50 rounded-lg'
+            {/* <Button className='bg-orange-500 hover:bg-orange-600 shadow-lg shadow-orange-500/50 rounded-lg'
               onClick={() => document.getElementById('timetable-upload')?.click()}
               disabled={isUploading}
             >
               <Upload className="w-4 h-4 mr-2" />
               อัพโหลดตารางเรียน
-            </Button>
+            </Button> */}
           </CardContent>
         </Card>
       ) : (

@@ -38,7 +38,7 @@ export default function StudentDashboard() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="mx-auto space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
+    <div className="mx-auto space-y-6 bg-[#FCC360] p-6 rounded-lg shadow-md shadow-gray-400/50">
       {/* Welcome Section */}
       <div className="bg-white rounded-lg shadow p-6 shadow-gray-500/50 rounded-lg">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
