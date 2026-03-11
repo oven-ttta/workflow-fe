@@ -67,7 +67,7 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-[#FFF3D0] text-black rounded-lg border border-[#FFF3D0]">
+        <Card className="bg-[#FFF3D0] text-black rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">ใกล้ Deadline</CardTitle>
             <Clock className="h-4 w-4" />
@@ -78,7 +78,7 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-[#F36F6F] text-black rounded-lg border border-[#F36F6F]">
+        <Card className="bg-[#F36F6F] text-black rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">เลย Deadline</CardTitle>
             <AlertCircle className="h-4 w-4" />
@@ -89,7 +89,7 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-[#FFE771] text-black rounded-lg border border-[#FFE771]">
+        <Card className="bg-[#FFE771] text-black rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">ต้องการช่วยเหลือ</CardTitle>
             <AlertCircle className="h-4 w-4" />
@@ -100,7 +100,7 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-[#EAAFFF] text-black rounded-lg border border-[#EAAFFF]">
+        <Card className="bg-[#EAAFFF] text-black rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">กำลังดำเนินการ</CardTitle>
             <TrendingUp className="h-4 w-4" />
@@ -111,7 +111,7 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-[#8FEEDB] text-black rounded-lg border border-[#8FEEDB]">
+        <Card className="bg-[#8FEEDB] text-black rounded-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">เสร็จสมบูรณ์</CardTitle>
             <CheckCircle className="h-4 w-4" />
@@ -124,32 +124,32 @@ export default function AdminDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <Card className='border border-white'>
+      <Card>
         <CardHeader>
           <CardTitle>เมนูด่วน</CardTitle>
         </CardHeader>
         <CardContent className='rounded-lg'>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <Link className='' href="/admin/projects">
-              <Button variant="outline" className="bg-[#FFF3D0] w-full h-24 flex flex-col items-center justify-center gap-2 border border-[#FFF3D0]">
+              <Button variant="outline" className="bg-[#FFF3D0] w-full h-24 flex flex-col items-center justify-center gap-2">
                 <FolderKanban className="h-8 w-8 text-black" />
                 <span className="font-medium">จัดการโปรเจค</span>
               </Button>
             </Link>
             <Link className='' href="/admin/users">
-              <Button variant="outline" className="bg-[#FFF3D0] w-full h-24 flex flex-col items-center justify-center gap-2 border border-[#FFF3D0]">
+              <Button variant="outline" className="bg-[#FFF3D0] w-full h-24 flex flex-col items-center justify-center gap-2">
                 <Users className="h-8 w-8 text-black" />
                 <span className="font-medium">จัดการผู้ใช้</span>
               </Button>
             </Link>
             <Link className=' ' href="/admin/dashboard">
-              <Button variant="outline" className="bg-[#FFF3D0] w-full h-24 flex flex-col items-center justify-center gap-2 border border-[#FFF3D0]">
+              <Button variant="outline" className="bg-[#FFF3D0] w-full h-24 flex flex-col items-center justify-center gap-2">
                 <TrendingUp className="h-8 w-8 text-black" />
                 <span className="font-medium">รายงานสรุป</span>
               </Button>
             </Link>
             <Link className='' href="/student/profile">
-              <Button variant="outline" className="bg-[#FFF3D0] w-full h-24 flex flex-col items-center justify-center gap-2 border border-[#FFF3D0]">
+              <Button variant="outline" className="bg-[#FFF3D0] w-full h-24 flex flex-col items-center justify-center gap-2">
                 <Users className="h-8 w-8 text-black" />
                 <span className="font-medium">โปรไฟล์</span>
               </Button>
