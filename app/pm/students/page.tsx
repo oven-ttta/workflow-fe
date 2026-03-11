@@ -123,40 +123,14 @@ export default function PMStudentsPage() {
   }, {} as Record<string, number>);
 
   return (
-    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
+    <div className="space-y-6 bg-[#FCC360] p-6 rounded-lg shadow-md shadow-gray-400/50">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold">รายชื่อนักเรียน</h1>
         <p className="text-gray-600 mt-1">ค้นหาและดูข้อมูลนักเรียนสำหรับเพิ่มเข้าโปรเจค</p>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className='shadow-gray-400/50'>
-          <CardContent className="pt-6">
-            <div className="text-center">
-              <Users className="w-8 h-8 mx-auto mb-2 text-orange-600" />
-              <p className="text-2xl font-bold">{students.length}</p>
-              <p className="text-sm text-gray-600">นักเรียนทั้งหมด</p>
-            </div>
-          </CardContent>
-        </Card>
-        
-        {['Frontend', 'Backend', 'UX/UI'].map((specialty) => (
-          <Card key={specialty} className='shadow-gray-400/50'>
-            <CardContent className="pt-6">
-              <div className="text-center">
-                <p className="text-2xl font-bold text-orange-600">
-                  {specialtyCounts[specialty] || 0}
-                </p>
-                <p className="text-sm text-gray-600">{specialty}</p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {/* Filters */}
+    {/* Filters */}
       <Card className='shadow-gray-400/50'>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -199,6 +173,49 @@ export default function PMStudentsPage() {
                   {specialty} ({specialtyCounts[specialty] || 0})
                 </Button>
               ))}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Stats */}
+      {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <Card className='shadow-gray-400/50'>
+          <CardContent className="pt-6">
+            <div className="text-center">
+              <Users className="w-8 h-8 mx-auto mb-2 text-orange-600" />
+              <p className="text-2xl font-bold">{students.length}</p>
+              <p className="text-sm text-gray-600">นักเรียนทั้งหมด</p>
+            </div>
+          </CardContent>
+        </Card>
+        
+        {['Frontend', 'Backend', 'UX/UI'].map((specialty) => (
+          <Card key={specialty} className='shadow-gray-400/50'>
+            <CardContent className="pt-6">
+              <div className="text-center">
+                <p className="text-2xl font-bold text-orange-600">
+                  {specialtyCounts[specialty] || 0}
+                </p>
+                <p className="text-sm text-gray-600">{specialty}</p>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div> */}
+
+      {/* Summary */}
+      <Card className="bg-blue-50 border-blue-200">
+        <CardContent className="pt-6">
+          <div className="flex items-center gap-3">
+            <Users className="w-6 h-6 text-blue-600" />
+            <div>
+              <p className="font-semibold text-blue-900">
+                แสดง {filteredStudents.length} จาก {students.length} นักเรียน
+              </p>
+              <p className="text-sm text-blue-700">
+                กรองตามความถนัด: {selectedSpecialty === 'ALL' ? 'ทั้งหมด' : selectedSpecialty}
+              </p>
             </div>
           </div>
         </CardContent>
@@ -262,23 +279,6 @@ export default function PMStudentsPage() {
               ))}
             </div>
           )}
-        </CardContent>
-      </Card>
-
-      {/* Summary */}
-      <Card className="bg-blue-50 border-blue-200">
-        <CardContent className="pt-6">
-          <div className="flex items-center gap-3">
-            <Users className="w-6 h-6 text-blue-600" />
-            <div>
-              <p className="font-semibold text-blue-900">
-                แสดง {filteredStudents.length} จาก {students.length} นักเรียน
-              </p>
-              <p className="text-sm text-blue-700">
-                กรองตามความถนัด: {selectedSpecialty === 'ALL' ? 'ทั้งหมด' : selectedSpecialty}
-              </p>
-            </div>
-          </div>
         </CardContent>
       </Card>
 
