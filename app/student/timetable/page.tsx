@@ -85,7 +85,11 @@ export default function TimetablePage() {
                 onClick={() => document.getElementById('timetable-upload')?.click()}
                 disabled={isUploading}
               >
-                <Upload className="w-4 h-4 mr-2" />
+                <img src="./public/edit-icon.svg" 
+                  alt="" 
+                  width="32" 
+                  height="32" 
+                  className="w-8 h-8 object-cover text-transparent"/>
                 {isUploading ? 'กำลังอัพโหลด...' : 'แก้ไขตารางเรียน'}
               </Button>
             </div>

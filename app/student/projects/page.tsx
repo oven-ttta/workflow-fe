@@ -30,8 +30,19 @@ export default function StudentProjectsPage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
-      <h1 className="text-3xl font-bold">โปรเจคของฉัน</h1>
+    <div className="space-y-1 bg-[#FCC360] p-6 rounded-lg shadow-md shadow-gray-400/50">
+      <div className='flex justify-between'>
+        <div>
+          <h1 className="text-3xl font-bold">โปรเจคของฉัน</h1>
+          <p className='mb-[20px] mt-[5px] text-gray-600'>จัดการและติดตามความคืบหน้าโปรเจค</p>
+        </div>
+        <div className="flex-row ">
+          <h2 className='text-2xl font-bold'>โปรเจคทั้งหมด</h2>
+          <h2 className='text-3xl font-bold flex justify-end'>xx</h2>
+        </div>
+      </div>
+      
+      
 
       {projects.length === 0 ? (
         <Card>
