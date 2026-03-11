@@ -45,103 +45,122 @@ export default function PMDashboard() {
   };
 
   return (
-    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
-      {/* Welcome Section */}
-      <div className="bg-white rounded-lg shadow p-6 shadow-gray-400/50">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          ยินดีต้อนรับ {currentUser?.firstName}! 👨‍💼
-        </h1>
-        <p className="text-gray-600">
-          คุณกำลังดูแล <span className="font-semibold">{projects.length}</span> โปรเจค
-        </p>
+    <div className="space-y-6 bg-[#FCC360] p-6 rounded-lg shadow-md shadow-gray-400/50">
+      {/* --- Container หลักที่แบ่งหน้าจอเป็น 2 ฝั่ง (ซ้าย-ขวา) --- */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w=[50%]">
+        <div className="md:col-span-2 space-y-6">
+          <div className="flex gap-4 mb-6 w-full">
+        <div className="flex-1 bg-white rounded-2xl p-6 shadow-sm flex flex-col justify-center shadow-gray-500/50">
+          <h1 className="text-2xl font-bold text-gray-900">
+            👋 สวัสดี {currentUser?.firstName}!
+          </h1>
+          <p className="text-gray-500 text-sm">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;คุณกำลังดูแล {projects.length} โปรเจค
+          </p>
+        </div>
+
+      {/*icon avartar*/}
+        <div className="bg-white rounded-2xl p-4 shadow-sm flex items-center justify-center w-24 shadow-gray-500/50">
+          <img src="./person-star-20-icon.svg" className="w-13 h-13" alt="profile" />
+        </div>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        <Card className='shadow-gray-400/50'>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">โปรเจคทั้งหมด</CardTitle>
-            <FolderKanban className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{stats.total}</div>
-            <p className="text-xs text-muted-foreground">ที่คุณดูแล</p>
-          </CardContent>
-        </Card>
+        {/* Quick Actions (เมนูด่วนจะมาอยู่ข้างล่าง Welcome ตาม Figma) */}
+          <Card className='shadow-gray-400/50 h-[300px] border-none rounded-[2rem]'>
+            <CardHeader>
+              <CardTitle className="text-xl font-bold">เมนูด่วน</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* --- ปุ่มที่ 1 --- */}
+                <Link href="/pm/projects">
+                  <Button 
+                    variant="ghost" 
+                    className="w-full h-[200px] flex flex-col items-center justify-center bg-[#FFF3D0] hover:bg-[#FFE8A2] rounded-3xl transition-colors border-none"
+                  >
+                    <FolderKanban className="h-8 w-8 mb-3 text-gray-700" />
+                    <span className="text-base font-medium text-gray-700">จัดการโปรเจค</span>  
+                  </Button>
+                </Link>
 
-        <Card className='shadow-gray-400/50'>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">กำลังดำเนินการ</CardTitle>
-            <Clock className="h-4 w-4 text-blue-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-blue-600">{stats.inProgress}</div>
-            <p className="text-xs text-muted-foreground">In Process</p>
-          </CardContent>
-        </Card>
+                {/* --- ปุ่มที่ 2 --- */}
+                <Link href="/pm/students">
+                  <Button 
+                    variant="ghost" 
+                    className="w-full h-[200px] flex flex-col items-center justify-center bg-[#FFF3D0] hover:bg-[#FFE8A2] rounded-3xl transition-colors border-none"
+                  >
+                    <Users className="h-8 w-8 mb-3 text-gray-700" />
+                    <span className="text-base font-medium text-gray-700">รายชื่อนักเรียน</span>
+                  </Button>
+                </Link>
 
-        <Card className='shadow-gray-400/50'>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">ใกล้ Deadline</CardTitle>
-            <AlertCircle className="h-4 w-4 text-yellow-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-yellow-600">{stats.dueSoon}</div>
-            <p className="text-xs text-muted-foreground">ภายใน 7 วัน</p>
-          </CardContent>
-        </Card>
+                {/* --- ปุ่มที่ 3 --- */}
+                <Link href="/student/profile">
+                  <Button 
+                    variant="ghost" 
+                    className="w-full h-[200px] flex flex-col items-center justify-center bg-[#FFF3D0] hover:bg-[#FFE8A2] rounded-3xl transition-colors border-none"
+                  >
+                    <Users className="h-8 w-8 mb-3 text-gray-700" />
+                    <span className="text-base font-medium text-gray-700">โปรไฟล์</span>
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
-        <Card className='shadow-gray-400/50'>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">ต้องการความช่วยเหลือ</CardTitle>
-            <AlertCircle className="h-4 w-4 text-red-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-red-600">{stats.needHelp}</div>
-            <p className="text-xs text-muted-foreground">HELP!!!</p>
-          </CardContent>
-        </Card>
+        {/* === ฝั่งขวา: Stats Cards (แยกอยู่อีกก้อนหนึ่งขนานกับฝั่งซ้าย) === */}
+        <div className="bg-white rounded-[2rem] p-6 shadow-sm shadow-gray-400/20 flex-1">
+          <div className="grid grid-cols-2 gap-4 flex-1">
+          {/* 1. Card โปรเจคทั้งหมด (col-span-2) */}
 
-        <Card className='shadow-gray-400/50'>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">เสร็จสมบูรณ์</CardTitle>
-            <CheckCircle className="h-4 w-4 text-green-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-600">{stats.completed}</div>
-            <p className="text-xs text-muted-foreground">Done</p>
-          </CardContent>
-        </Card>
+          <Card className="col-span-2 shadow-gray-400/50 bg-[#FFF3D0]">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">โปรเจคทั้งหมด</CardTitle>
+              <FolderKanban className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.total}</div>
+              <p className="text-xs text-muted-foreground">ที่คุณดูแล</p>
+            </CardContent>
+          </Card>
+
+          {/* 2-5. Card ย่อยอื่นๆ */}
+          <Card className="shadow-gray-400/50 bg-[#FFF3D0]">
+            <CardContent className="pt-6">
+              <Clock className="h-4 w-4 text-blue-600 mb-2" />
+              <div className="text-xl font-bold text-blue-600">{stats.inProgress}</div>
+              <p className="text-xs text-muted-foreground">In Process</p>
+            </CardContent>
+          </Card>
+
+          <Card className="shadow-gray-400/50 bg-[#FFF3D0]">
+            <CardContent className="pt-6">
+              <AlertCircle className="h-4 w-4 text-yellow-600 mb-2" />
+              <div className="text-xl font-bold text-yellow-600">{stats.dueSoon}</div>
+              <p className="text-xs text-muted-foreground">7 วัน</p>
+            </CardContent>
+          </Card>
+
+          <Card className="shadow-gray-400/50 bg-[#FFF3D0]">
+            <CardContent className="pt-6">
+              <AlertCircle className="h-4 w-4 text-red-600 mb-2" />
+              <div className="text-xl font-bold text-red-600">{stats.needHelp}</div>
+              <p className="text-xs text-muted-foreground">HELP!!!</p>
+            </CardContent>
+          </Card>
+
+          <Card className="shadow-gray-400/50 bg-[#FFF3D0]">
+            <CardContent className="pt-6">
+              <CheckCircle className="h-4 w-4 text-green-600 mb-2" />
+              <div className="text-xl font-bold text-green-600">{stats.completed}</div>
+              <p className="text-xs text-muted-foreground">Done</p>
+            </CardContent>
+          </Card>
+        </div>
+        </div>
       </div>
 
-      {/* Quick Actions */}
-      <Card className='shadow-gray-400/50'>
-        <CardHeader>
-          <CardTitle>เมนูด่วน</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Link href="/pm/projects">
-              <Button variant="outline" className="w-full h-20 flex flex-col items-center justify-center">
-                <FolderKanban className="h-6 w-6 mb-2" />
-                <span>จัดการโปรเจค</span>
-              </Button>
-            </Link>
-            <Link href="/pm/students">
-              <Button variant="outline" className="w-full h-20 flex flex-col items-center justify-center">
-                <Users className="h-6 w-6 mb-2" />
-                <span>รายชื่อนักเรียน</span>
-              </Button>
-            </Link>
-            <Link href="/student/profile">
-              <Button variant="outline" className="w-full h-20 flex flex-col items-center justify-center">
-                <Users className="h-6 w-6 mb-2" />
-                <span>โปรไฟล์</span>
-              </Button>
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
 
       {/* Projects List */}
       <Card className='shadow-gray-400/50'>
