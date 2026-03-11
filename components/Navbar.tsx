@@ -54,13 +54,13 @@ export function Navbar() {
   }
 
   return (
-    <nav className="bg-[#fcc360] shadow-sm border-b">
+    <nav className="bg-[#fcc360] shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link href={`/${user.role.toLowerCase()}`} className="text-2xl font-bold text-orange-600">
-                <Image src="/logo.svg" alt="Logo" width={40} height={40} />
+                <Image src="/logo.svg" alt="Logo" width={60} height={60} />
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-4">
