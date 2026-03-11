@@ -1,5 +1,5 @@
 import api from './api';
-import { User, TimetableResponse, ProjectResponse, RegisterRequest } from './types';
+import { User, TimetableResponse, ProjectResponse, RegisterRequest, TimeSlot } from './types';
 
 export const studentService = {
   async getProfile(): Promise<User> {
@@ -46,6 +46,11 @@ export const studentService = {
       });
       return response.data;
     }
+  },
+
+  async updateTimetable(slots: TimeSlot[]): Promise<TimetableResponse> {
+    const response = await api.put<TimetableResponse>('/student/timetable', { slots });
+    return response.data;
   },
 
   async getTimetable(): Promise<TimetableResponse> {
