@@ -86,255 +86,201 @@ export default function ProfilePage() {
   if (isLoading) return <Loading />;
 
   return (
-    <div className=" mx-auto space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
-      <div>
-        <h1 className="text-3xl font-bold">โปรไฟล์</h1>
-        <p className="text-gray-600 mt-1">จัดการข้อมูลส่วนตัวของคุณ</p>
+    <div className="mx-auto bg-[#FCC360] p-8 rounded-[40px] shadow-md min-h-screen font-sans">
+      {/* Header: ชื่อหน้า */}
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-black">โปรไฟล์</h1>
+        <p className="text-black/70 mt-1 text-lg">จัดการข้อมูลส่วนตัวของคุณ</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
-        {/* Profile Info Card */}
-        <Card className="md:col-span-1 shadow-lg shadow-gray-300/50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <UserIcon className="w-5 h-5" />
-              ข้อมูลพื้นฐาน
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex flex-col items-center text-center space-y-4">
-              <div className="w-24 h-24 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center">
-                <UserIcon className="w-12 h-12 text-white" />
+        {/* ฝั่งซ้าย: Profile Card & Logout */}
+        <div className="space-y-4">
+          {/* Card ข้อมูลพื้นฐาน */}
+          <div className="bg-white rounded-[35px] p-8 shadow-sm">
+            <div className="flex items-center gap-2 mb-8">
+              <UserIcon className="w-6 h-6" />
+              <span className="text-xl font-bold">ข้อมูลพื้นฐาน</span>
+            </div>
+
+            {/* Avatar ส่วนตัว */}
+            <div className="flex flex-col items-center mb-8">
+              <div className="w-28 h-28 bg-black rounded-full flex items-center justify-center mb-4 text-white">
+                <UserIcon size={64} />
               </div>
-              <div>
-                <h3 className="font-semibold text-lg">{profile?.firstName}</h3>
-                <p className="text-sm text-gray-600">{profile?.customId}</p>
+              <div className="text-center">
+                <h3 className="text-2xl font-black italic uppercase">{profile?.firstName}</h3>
+                <p className="text-gray-500 tracking-widest text-xs">{profile?.customId}</p>
               </div>
             </div>
 
-            <div className="space-y-3 pt-4 border-t">
-              <div>
-                <p className="text-xs text-gray-500 mb-1">ชื่อผู้ใช้</p>
-                <p className="font-medium">{profile?.username}</p>
+            {/* รายละเอียด (Label + Value) */}
+            <div className="space-y-4 border-t pt-6">
+              <div className="flex  text-sm text-black/70">
+                <span className="text-gray-400 mr-[10px]">ชื่อผู้ใช้</span>
+                <span className="font-bold text-gray-700">{profile?.username}</span>
               </div>
-              <div>
-                <p className="text-xs text-gray-500 mb-1">ชั้นปี</p>
-                <p className="font-medium">{profile?.yearLevel}</p>
+              <div className="flex text-sm">
+                <span className="text-gray-400 mr-[10px]">ชั้นปี</span>
+                <span className="font-bold text-gray-700">{profile?.yearLevel}</span>
               </div>
-              <div>
-                <p className="text-xs text-gray-500 mb-1">ความถนัด</p>
-                <span className="inline-block px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm font-medium">
-                  {profile?.specialty}
-                </span>
+
+              <div className="space-y-2">
+                <p className="text-sm text-gray-400">ความถนัด</p>
+                <div className="w-full py-2 bg-[#FFF3D6] text-[#D97706] rounded-full text-center font-bold text-sm">
+                  {profile?.specialty || 'ไม่ได้ระบุ'}
+                </div>
               </div>
-              <div>
-                <p className="text-xs text-gray-500 mb-1">สถานะ</p>
-                <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
-                  profile?.isActive 
-                    ? 'bg-green-200 text-green-800' 
-                    : 'bg-red-100 text-red-800'
+
+              <div className="space-y-2">
+                <p className="text-sm text-gray-400">สถานะ</p>
+                <div className={`w-full py-2 rounded-full text-center font-bold text-sm uppercase ${
+                  profile?.isActive ? 'bg-green-100 text-green-700' : 'bg-red-400 text-white'
                 }`}>
                   {profile?.isActive ? 'ใช้งานอยู่' : 'ระงับ'}
-                </span>
+                </div>
               </div>
-              <div>
-                <p className="text-xs text-gray-500 mb-1">บทบาท</p>
-                <span className="inline-block px-3 py-1 bg-purple-100 text-blue-800 rounded-full text-sm font-medium">
-                  {profile?.role}
-                </span>
+
+              <div className="space-y-2">
+                <p className="text-sm text-gray-400">บทบาท</p>
+                <div className="w-full py-2 bg-[#E9D5FF] text-[#7C3AED] rounded-full text-center font-bold text-sm uppercase">
+                  {profile?.role || '-'}
+                </div>
               </div>
             </div>
 
-            <div className="pt-4 border-t">
-              <p className="text-xs text-gray-500">สมาชิกตั้งแต่</p>
-              <p className="text-sm">
+            <div className="mt-8 pt-4 border-t border-dashed">
+              <p className="text-[10px] text-gray-400 uppercase tracking-tighter">เป็นสมาชิกตั้งแต่</p>
+              <p className="font-bold text-xs text-gray-600">
                 {profile?.createdAt && new Date(profile.createdAt).toLocaleDateString('th-TH', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Edit Form Card */}
-        <Card className="md:col-span-2 shadow-lg shadow-gray-300/50">
-          <CardHeader>
-            <CardTitle>แก้ไขข้อมูล</CardTitle>
-            <CardDescription>
-              อัพเดตข้อมูลส่วนตัวของคุณ
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {/* Warning Alert */}
-              <div className="bg-orange-100 border border-blue-200 rounded-lg p-4 flex gap-3">
-                <Info className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
-                <div className="text-sm text-black-800">
-                  <p className="font-medium mb-1">คำแนะนำ:</p>
-                  <ul className="list-disc list-inside space-y-1">
-                    <li>กรอกรหัสผ่านเพื่อยืนยันการแก้ไขข้อมูล</li>
-                    <li>ถ้าต้องการเปลี่ยนรหัสผ่าน ให้กรอกรหัสผ่านใหม่ในช่องรหัสผ่าน</li>
-                    <li>ข้อมูลที่แก้ไขจะมีผลทันที</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="grid gap-6 md:grid-cols-2">
-                {/* First Name */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">
-                    ชื่อจริง <span className="text-red-500">*</span>
-                  </label>
-                  <Input
-                    {...register('firstName', { required: 'กรุณากรอกชื่อจริง' })}
-                    placeholder="สมชาย"
-                    disabled={isSaving}
-                  />
-                  {errors.firstName && (
-                    <p className="text-sm text-red-600">{errors.firstName.message}</p>
-                  )}
-                </div>
-
-                {/* Year Level */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">
-                    ชั้นปี <span className="text-red-500">*</span>
-                  </label>
-                  <Input
-                    {...register('yearLevel', { required: 'กรุณากรอกชั้นปี' })}
-                    placeholder="ปี 3"
-                    disabled={isSaving}
-                  />
-                  {errors.yearLevel && (
-                    <p className="text-sm text-red-600">{errors.yearLevel.message}</p>
-                  )}
-                </div>
-
-                {/* Specialty */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">
-                    ความถนัด <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    {...register('specialty', { required: 'กรุณาเลือกความถนัด' })}
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    disabled={isSaving}
-                  >
-                    <option value="">เลือกความถนัด</option>
-                    {SPECIALTIES.map((specialty) => (
-                      <option key={specialty} value={specialty}>
-                        {specialty}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.specialty && (
-                    <p className="text-sm text-red-600">{errors.specialty.message}</p>
-                  )}
-                </div>
-
-                {/* Username */}
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">
-                    ชื่อผู้ใช้ <span className="text-red-500">*</span>
-                  </label>
-                  <Input
-                    {...register('username', { required: 'กรุณากรอกชื่อผู้ใช้' })}
-                    placeholder="username"
-                    disabled={isSaving}
-                  />
-                  {errors.username && (
-                    <p className="text-sm text-red-600">{errors.username.message}</p>
-                  )}
-                </div>
-
-                {/* Password */}
-                <div className="space-y-2 md:col-span-2">
-                  <label className="text-sm font-medium flex items-center gap-2">
-                    <Lock className="w-4 h-4" />
-                    รหัสผ่าน <span className="text-red-500">*</span>
-                  </label>
-                  <Input
-                    {...register('password', { 
-                      required: 'กรุณากรอกรหัสผ่านเพื่อยืนยัน',
-                      minLength: { 
-                        value: 6, 
-                        message: 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร' 
-                      }
-                    })}
-                    type="password"
-                    placeholder="กรอกรหัสผ่านเพื่อยืนยันการแก้ไข หรือรหัสผ่านใหม่"
-                    disabled={isSaving}
-                  />
-                  {errors.password && (
-                    <p className="text-sm text-red-600">{errors.password.message}</p>
-                  )}
-                  <p className="text-xs text-gray-500">
-                    ⚠️ กรอกรหัสผ่านปัจจุบันเพื่อยืนยัน หรือกรอกรหัสผ่านใหม่ถ้าต้องการเปลี่ยน
-                  </p>
-                </div>
-              </div>
-
-              {/* Form Actions */}
-              <div className="flex gap-3 pt-4 border-t">
-                <Button
-                  type="submit"
-                  className="flex-1 bg-orange-500 hover:bg-orange-600 shadow-lg shadow-orange-500/50 rounded-lg"
-                  disabled={isSaving}
-                >
-                  <Save className="w-4 h-4 mr-2" />
-                  {isSaving ? 'กำลังบันทึก...' : 'บันทึกการแก้ไข'}
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={() => {
-                    reset({
-                      firstName: profile?.firstName,
-                      yearLevel: profile?.yearLevel,
-                      specialty: profile?.specialty,
-                      username: profile?.username,
-                      password: ''
-                    });
-                    toast.success('ยกเลิกการแก้ไข');
-                  }}
-                  disabled={isSaving}
-                >
-                  ยกเลิก
-                </Button>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Additional Info Card */}
-      <Card className="shadow-lg shadow-gray-300/50">
-        <CardHeader>
-          <CardTitle>ข้อมูลเพิ่มเติม</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="p-4 bg-orange-100 rounded-lg">
-              <p className="text-sm text-gray-600 mb-1">รหัสนักเรียน</p>
-              <p className="font-mono font-semibold text-lg">{profile?.customId}</p>
-            </div>
-            <div className="p-4 bg-orange-100 rounded-lg">
-              <p className="text-sm text-gray-600 mb-1">อัพเดตล่าสุด</p>
-              <p className="font-medium">
-                {profile?.updatedAt && new Date(profile.updatedAt).toLocaleDateString('th-TH', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
+                  day: 'numeric', month: 'long', year: 'numeric'
                 })}
               </p>
             </div>
           </div>
-        </CardContent>
-      </Card>
+
+          {/* ปุ่มออกจากระบบ */}
+          <button 
+            onClick={() =>  authService.logout()}
+            className="w-full bg-white h-16 rounded-[20px] shadow-sm flex items-center px-6 gap-4 hover:bg-gray-50 transition-colors"
+          >
+            <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+            <span className="font-bold text-lg">ออกจากระบบ</span>
+          </button>
+        </div>
+
+        {/* ฝั่งขวา: ฟอร์มแก้ไข */}
+        <div className="md:col-span-2">
+          <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-[35px] p-10 shadow-sm h-[735px] flex flex-col mb-[-30px] rounded-br-none">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold">แก้ไขข้อมูล</h2>
+              <p className="text-gray-400 text-sm">อัพเดตข้อมูลส่วนตัวของคุณ</p>
+            </div>
+
+            {/* กล่องไฮไลท์สีเหลืองนวล */}
+            <div className="bg-[#FFF3D6] rounded-[25px] w-full h-40 mb-8 flex items-center justify-center">
+               <Info className="text-orange-300 w-12 h-12" />
+            </div>
+
+            {/* Form Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 flex-grow">
+              <div className="space-y-2">
+                <label className="font-bold flex gap-1">ชื่อจริง <span className="text-red-500">*</span></label>
+                <Input 
+                  {...register('firstName', { required: 'กรุณากรอกชื่อจริง' })}
+                  className="w-full h-12 border rounded-xl px-4" 
+                  disabled={isSaving}
+                />
+                {errors.firstName && <p className="text-xs text-red-500">{errors.firstName.message}</p>}
+              </div>
+
+              <div className="space-y-2">
+                <label className="font-bold flex gap-1">ชั้นปี <span className="text-red-500">*</span></label>
+                <Input 
+                  {...register('yearLevel', { required: 'กรุณากรอกชั้นปี' })}
+                  className="w-full h-12 border rounded-xl px-4" 
+                  disabled={isSaving}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="font-bold flex gap-1">ความถนัด <span className="text-red-500">*</span></label>
+                <select 
+                  {...register('specialty', { required: 'กรุณาเลือกความถนัด' })}
+                  className="w-full h-12 border rounded-xl px-4 bg-gray-50/50 outline-none focus:ring-2 ring-orange-400"
+                  disabled={isSaving}
+                >
+                  <option value="">เลือกความถนัด</option>
+                  {SPECIALTIES.map((specialty) => (
+                    <option key={specialty} value={specialty}>{specialty}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="font-bold flex gap-1">ชื่อผู้ใช้ <span className="text-red-500">*</span></label>
+                <Input 
+                  {...register('username', { required: 'กรุณากรอกชื่อผู้ใช้' })}
+                  className="w-full h-12 border rounded-xl px-4" 
+                  disabled={isSaving}
+                />
+              </div>
+
+              <div className="md:col-span-2 space-y-2">
+                <label className="font-bold flex items-center gap-2">
+                  <Lock className="w-4 h-4" /> รหัสผ่าน <span className="text-red-500">*</span>
+                </label>
+                <Input 
+                  {...register('password')}
+                  type="password" 
+                  placeholder="กรอกรหัสผ่านเพื่อยืนยัน" 
+                  className="w-full h-12 border rounded-xl px-4"
+                  disabled={isSaving}
+                />
+              </div>
+              <p className="text-[10px] text-gray-400 flex items-center gap-1 uppercase font-bold mt-1">
+                  <Info className="w-3 h-5" />
+                  กรอกรหัสผ่านปัจจุบันเพื่อยืนยัน หรือกรอกรหัสผ่านใหม่ถ้าต้องการเปลี่ยน
+                </p>
+            </div>
+
+            
+          </form>
+
+          {/* Footer Actions */}
+            <div className="flex flex-col md:flex-row gap-4 mt-12 items-center">
+              <div className="bg-[#FFFFFF] border border-gray-100 rounded-[20px] px-6 py-3 flex-1 w-full ">
+                <div className=''>
+                  <p className="text-[10px] text-gray-400 uppercase font-bold">อัปเดตล่าสุด</p>
+                  <p className="text-xs font-bold text-gray-600">
+                    {profile?.updatedAt ? new Date(profile.updatedAt).toLocaleString('th-TH') : '-'}
+                  </p>
+                </div>
+                
+              </div>
+              
+              <div className="flex gap-3 w-full md:w-auto bg-[#ffffff] mt-[-30px] rounded-[20px] px-6 py-3 rounded-tr-none rounded-tl-none">
+                <button 
+                  type="button"
+                  onClick={() => reset()}
+                  className="h-14 px-8 rounded-[20px] font-bold text-gray-500 hover:bg-gray-100 transition-colors border border-gray-300"
+                  disabled={isSaving}
+                >
+                  ยกเลิก
+                </button>
+                <Button 
+                  type="submit" 
+                  className="h-14 px-8 rounded-[20px] bg-[#FCC360] hover:bg-[#fbb33d] font-bold text-black shadow-md flex items-center gap-2"
+                  disabled={isSaving}
+                >
+                  <Save className="w-5 h-5" />
+                  {isSaving ? 'กำลังบันทึก...' : 'บันทึกการแก้ไข'}
+                </Button>
+              </div>
+            </div>
+
+        </div>
+      </div>
     </div>
   );
 }
