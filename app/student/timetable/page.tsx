@@ -230,92 +230,113 @@ export default function TimetablePage() {
       )}
 
       {isEditOpen && editingSlot && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-6">
-            <h2 className="text-xl font-semibold mb-4">แก้ไขตารางเรียน</h2>
+        <div className=''> 
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity">
+            <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 transform transition-all border-t-4 border-orange-500">
+              <h2 className="text-2xl font-bold mb-6 text-gray-800 flex items-center gap-2">
+                <span className="w-2 h-8 bg-orange-500 rounded-full"></span>
+                แก้ไขตารางเรียน
+              </h2>
 
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">วัน</label>
-                <select
-                  className="w-full border rounded-md px-3 py-2 text-sm"
-                  value={editingSlot.dayOfWeek}
-                  onChange={(e) => handleEditFieldChange('dayOfWeek', e.target.value)}
+              <div className="space-y-5">
+                {/* วัน */}
+                <div className="group">
+                  <label className="block text-sm font-semibold text-gray-600 mb-1.5 group-focus-within:text-orange-500 transition-colors">วัน</label>
+                  <select
+                    className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-gray-50 focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none transition-all cursor-pointer"
+                    value={editingSlot.dayOfWeek}
+                    onChange={(e) => handleEditFieldChange('dayOfWeek', e.target.value)}
+                  >
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                  </select>
+                </div>
+
+                {/* เวลา */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="group">
+                    <label className="block text-sm font-semibold text-gray-600 mb-1.5 group-focus-within:text-orange-500 transition-colors">เวลาเริ่ม</label>
+                    <input
+                      type="time"
+                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-gray-50 focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none transition-all"
+                      value={editingSlot.startTime}
+                      onChange={(e) => handleEditFieldChange('startTime', e.target.value)}
+                    />
+                  </div>
+                  <div className="group">
+                    <label className="block text-sm font-semibold text-gray-600 mb-1.5 group-focus-within:text-orange-500 transition-colors">เวลาสิ้นสุด</label>
+                    <input
+                      type="time"
+                      className="w-full border border-gray-200 rounded-lg px-3 py-2.5 text-sm bg-gray-50 focus:bg-white focus:border-orange-500 focus:ring-4 focus:ring-orange-100 outline-none transition-all"
+                      value={editingSlot.endTime}
+                      onChange={(e) => handleEditFieldChange('endTime', e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                {/* วิชา */}
+                <div className="group">
+                  <label className="block text-sm font-semibold text-gray-600 mb-1.5 group-focus-within:text-orange-500 transition-colors">วิชา</label>
+                  <input
+                    type="text"
+                    placeholder="ชื่อวิชา..."
+                    className={`w-full border rounded-lg px-3 py-2.5 text-sm outline-none transition-all ${
+                      editingSlot.isFree 
+                      ? 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed' 
+                      : 'bg-gray-50 focus:bg-white border-gray-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-100'
+                    }`}
+                    value={editingSlot.subject}
+                    onChange={(e) => handleEditFieldChange('subject', e.target.value)}
+                    disabled={editingSlot.isFree}
+                  />
+                </div>
+
+                {/* Checkbox */}
+                <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-orange-50 transition-colors cursor-pointer group">
+                  <input
+                    id="is-free"
+                    type="checkbox"
+                    checked={editingSlot.isFree}
+                    onChange={(e) => handleEditFieldChange('isFree', e.target.checked)}
+                    className="h-5 w-5 accent-orange-500 rounded border-gray-300 transition-transform group-active:scale-90"
+                  />
+                  <label htmlFor="is-free" className="text-sm font-medium text-gray-700 cursor-pointer select-none">
+                    เวลาว่าง (ไม่มีเรียน)
+                  </label>
+                </div>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex justify-end gap-3 mt-8">
+                <button
+                  className="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 font-medium rounded-lg transition-all active:scale-95 disabled:opacity-50"
+                  onClick={closeEditModal}
+                  disabled={isSaving}
                 >
-                  <option value="Monday">Monday</option>
-                  <option value="Tuesday">Tuesday</option>
-                  <option value="Wednesday">Wednesday</option>
-                  <option value="Thursday">Thursday</option>
-                  <option value="Friday">Friday</option>
-                  <option value="Saturday">Saturday</option>
-                  <option value="Sunday">Sunday</option>
-                </select>
+                  ยกเลิก
+                </button>
+                <button
+                  className="px-8 py-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg shadow-lg shadow-orange-200 hover:shadow-orange-300 transition-all active:scale-95 disabled:opacity-50 flex items-center gap-2"
+                  onClick={handleSaveEditedSlot}
+                  disabled={isSaving}
+                >
+                  {isSaving ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      กำลังบันทึก...
+                    </>
+                  ) : 'บันทึกข้อมูล'}
+                </button>
               </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-sm font-medium mb-1">เวลาเริ่ม</label>
-                  <input
-                    type="time"
-                    className="w-full border rounded-md px-3 py-2 text-sm"
-                    value={editingSlot.startTime}
-                    onChange={(e) => handleEditFieldChange('startTime', e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">เวลาสิ้นสุด</label>
-                  <input
-                    type="time"
-                    className="w-full border rounded-md px-3 py-2 text-sm"
-                    value={editingSlot.endTime}
-                    onChange={(e) => handleEditFieldChange('endTime', e.target.value)}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-1">วิชา</label>
-                <input
-                  type="text"
-                  className="w-full border rounded-md px-3 py-2 text-sm"
-                  value={editingSlot.subject}
-                  onChange={(e) => handleEditFieldChange('subject', e.target.value)}
-                  disabled={editingSlot.isFree}
-                />
-              </div>
-
-              <div className="flex items-center gap-2">
-                <input
-                  id="is-free"
-                  type="checkbox"
-                  checked={editingSlot.isFree}
-                  onChange={(e) => handleEditFieldChange('isFree', e.target.checked)}
-                  className="h-4 w-4"
-                />
-                <label htmlFor="is-free" className="text-sm">
-                  เวลาว่าง (ไม่มีเรียน)
-                </label>
-              </div>
-            </div>
-
-            <div className="flex justify-end gap-3 mt-6">
-              <Button
-                className="bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg"
-                onClick={closeEditModal}
-                disabled={isSaving}
-              >
-                ยกเลิก
-              </Button>
-              <Button
-                className="bg-green-500 hover:bg-green-600 shadow-lg shadow-green-500/50 rounded-lg"
-                onClick={handleSaveEditedSlot}
-                disabled={isSaving}
-              >
-                {isSaving ? 'กำลังบันทึก...' : 'บันทึก'}
-              </Button>
             </div>
           </div>
         </div>
+        
       )}
     </div>
   );
