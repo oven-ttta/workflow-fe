@@ -204,7 +204,7 @@ export default function AdminUsersPage() {
   };
 
   return (
-    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
+    <div className="space-y-6 bg-[#FCC360] p-6 rounded-[25px]">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -215,47 +215,48 @@ export default function AdminUsersPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+        <Card className="bg-[#A4CBFF] text-black">
           <CardContent className="pt-6">
             <div className="text-center">
               <Users className="w-8 h-8 mx-auto mb-2" />
               <p className="text-3xl font-bold">{roleCounts.ALL}</p>
-              <p className="text-sm text-blue-100">ผู้ใช้ทั้งหมด</p>
+              <p className="text-sm text-black">ผู้ใช้ทั้งหมด</p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white">
+        <Card className="bg-[#8FEEDB] text-black">
           <CardContent className="pt-6">
             <div className="text-center">
               <p className="text-3xl font-bold">{roleCounts.STUDENT}</p>
-              <p className="text-sm text-green-100">นักเรียน</p>
+              <p className="text-sm text-black">นักเรียน</p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white">
+        <Card className="bg-[#EAAFFF] text-black">
           <CardContent className="pt-6">
             <div className="text-center">
               <p className="text-3xl font-bold">{roleCounts.PM}</p>
-              <p className="text-sm text-purple-100">PM</p>
+              <p className="text-sm text-black">PM</p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-red-500 to-red-600 text-white">
+        <Card className="bg-[#FF0000] text-black">
           <CardContent className="pt-6">
             <div className="text-center">
               <p className="text-3xl font-bold">{roleCounts.ADMIN}</p>
-              <p className="text-sm text-red-100">Admin</p>
+              <p className="text-sm text-black">Admin</p>
             </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Filters */}
-      <Card className="shadow-lg shadow-gray-300/50 rounded-lg">
-        <CardHeader>
+      <Card className="rounded-lg">
+        <CardHeader className='flex flex-row items-center gap-2'>
+          <img src="/Vector-2.svg" alt="ค้นหาและกรอง" className='w-4 h-4' />
           <CardTitle>ค้นหาและกรอง</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -376,7 +377,7 @@ export default function AdminUsersPage() {
       )}
 
       {/* Users List */}
-      <Card className="shadow-lg shadow-gray-300/50 rounded-lg">
+      <Card className="rounded-lg">
         <CardHeader>
           <CardTitle>รายชื่อผู้ใช้ ({filteredUsers.length})</CardTitle>
         </CardHeader>
