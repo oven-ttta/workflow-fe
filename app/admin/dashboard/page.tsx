@@ -62,71 +62,71 @@ export default function AdminDashboardPage() {
     : 0;
 
   return (
-    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
+    <div className="space-y-6 bg-[#FCC360] p-6 rounded-[25px]">
       {/* Header */}
-      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg shadow-lg p-6 text-white">
+      <div className="bg-[#DF8FFC] rounded-lg p-6 text-black">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2">📊 Dashboard & Reports</h1>
-            <p className="text-indigo-100">ภาพรวมและรายงานสถานะโปรเจคทั้งหมด</p>
+            <p className="text-black">ภาพรวมและรายงานสถานะโปรเจคทั้งหมด</p>
           </div>
-          <Activity className="w-16 h-16 text-indigo-200" />
+          <Activity className="w-16 h-16 text-black" />
         </div>
       </div>
 
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+        <Card className="bg-[#A4CBFF] text-black">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">โปรเจคทั้งหมด</CardTitle>
             <FolderKanban className="h-5 w-5" />
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{stats.total}</div>
-            <p className="text-xs text-blue-100 mt-1">ทั้งระบบ</p>
+            <p className="text-xs text-black mt-1">ทั้งระบบ</p>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white">
+        <Card className="bg-[#8FEEDB] text-black">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">เสร็จสมบูรณ์</CardTitle>
             <CheckCircle className="h-5 w-5" />
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{stats.done}</div>
-            <p className="text-xs text-green-100 mt-1">
+            <p className="text-xs text-black mt-1">
               คิดเป็น {completionRate}% ของทั้งหมด
             </p>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white">
+        <Card className="bg-[#EAAF] text-black">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">กำลังดำเนินการ</CardTitle>
             <TrendingUp className="h-5 w-5" />
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{stats.inProgress}</div>
-            <p className="text-xs text-purple-100 mt-1">
+            <p className="text-xs text-black mt-1">
               คิดเป็น {inProgressRate}% ของทั้งหมด
             </p>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-red-500 to-red-600 text-white">
+        <Card className="bg-[#FF0000] text-black">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">ต้องการความช่วยเหลือ</CardTitle>
             <AlertCircle className="h-5 w-5" />
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{stats.needHelp}</div>
-            <p className="text-xs text-red-100 mt-1">ต้องดูแลเร่งด่วน!</p>
+            <p className="text-xs text-black mt-1">ต้องดูแลเร่งด่วน!</p>
           </CardContent>
         </Card>
       </div>
 
       {/* Status Breakdown */}
-      <Card className="shadow-lg shadow-gray-300/50 rounded-lg">
+      <Card className="rounded-lg">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <BarChart3 className="w-5 h-5" />
@@ -345,7 +345,7 @@ export default function AdminDashboardPage() {
       </Card>
 
       {/* Quick Actions */}
-      <Card className="shadow-lg shadow-gray-300/50 rounded-lg">
+      <Card className="rounded-lg">
         <CardHeader>
           <CardTitle>เครื่องมือจัดการ</CardTitle>
         </CardHeader>

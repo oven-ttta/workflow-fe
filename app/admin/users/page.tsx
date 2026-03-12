@@ -33,6 +33,10 @@ export default function AdminUsersPage() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const [timetable, setTimetable] = useState<TimeSlot[]>([]);
   const [loadingTimetable, setLoadingTimetable] = useState(false);
+  const [showRoleModal, setShowRoleModal] = useState(false);
+  const [selectedRoleUser, setSelectedRoleUser] = useState<User | null>(null);
+  const [newRole, setNewRole] = useState<'STUDENT' | 'PM' | 'ADMIN'>('STUDENT');
+  const [changingRole, setChangingRole] = useState(false);
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<UserForm>();
 
@@ -112,25 +116,32 @@ export default function AdminUsersPage() {
     }
   };
 
-  const handleChangeRole = async (userId: number, currentRole: string, name: string) => {
-    const roles = ['STUDENT', 'PM', 'ADMIN'];
-    const newRole = prompt(
-      `เปลี่ยนบทบาทของ ${name}\nปัจจุบัน: ${currentRole}\n\nเลือกบทบาทใหม่:\n- STUDENT\n- PM\n- ADMIN`,
-      currentRole
-    );
+  const handleChangeRole = (user: User) => {
+    setSelectedRoleUser(user);
+    setNewRole(user.role as 'STUDENT' | 'PM' | 'ADMIN');
+    setShowRoleModal(true);
+  };
 
-    if (!newRole || !roles.includes(newRole.toUpperCase())) {
-      toast.error('บทบาทไม่ถูกต้อง');
-      return;
-    }
+  const confirmChangeRole = async () => {
+    if (!selectedRoleUser) return;
 
     try {
-      await adminService.updateUserRole(userId, newRole.toUpperCase());
+      setChangingRole(true);
+      await adminService.updateUserRole(selectedRoleUser.id, newRole);
       toast.success('เปลี่ยนบทบาทสำเร็จ!');
+      setShowRoleModal(false);
+      setSelectedRoleUser(null);
       loadUsers();
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'ไม่สามารถเปลี่ยนบทบาทได้');
+    } finally {
+      setChangingRole(false);
     }
+  };
+
+  const closeRoleModal = () => {
+    setShowRoleModal(false);
+    setSelectedRoleUser(null);
   };
 
   const onSubmit = async (data: UserForm) => {
@@ -153,10 +164,10 @@ export default function AdminUsersPage() {
     setShowTimetable(true);
     setLoadingTimetable(true);
     setTimetable([]); // Reset to empty array
-    
+
     try {
       const data = await adminService.getStudentTimetable(user.id);
-      
+
       // Backend returns {slots: [...]} format
       if (data && typeof data === 'object' && 'slots' in data) {
         const slotsArray = (data as any).slots;
@@ -204,7 +215,7 @@ export default function AdminUsersPage() {
   };
 
   return (
-    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
+    <div className="space-y-6 bg-[#FCC360] p-6 rounded-[25px]">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -215,47 +226,48 @@ export default function AdminUsersPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white">
+        <Card className="bg-[#A4CBFF] text-black">
           <CardContent className="pt-6">
             <div className="text-center">
               <Users className="w-8 h-8 mx-auto mb-2" />
               <p className="text-3xl font-bold">{roleCounts.ALL}</p>
-              <p className="text-sm text-blue-100">ผู้ใช้ทั้งหมด</p>
+              <p className="text-sm text-black">ผู้ใช้ทั้งหมด</p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white">
+        <Card className="bg-[#8FEEDB] text-black">
           <CardContent className="pt-6">
             <div className="text-center">
               <p className="text-3xl font-bold">{roleCounts.STUDENT}</p>
-              <p className="text-sm text-green-100">นักเรียน</p>
+              <p className="text-sm text-black">นักเรียน</p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white">
+        <Card className="bg-[#EAAFFF] text-black">
           <CardContent className="pt-6">
             <div className="text-center">
               <p className="text-3xl font-bold">{roleCounts.PM}</p>
-              <p className="text-sm text-purple-100">PM</p>
+              <p className="text-sm text-black">PM</p>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-red-500 to-red-600 text-white">
+        <Card className="bg-[#FF0000] text-black">
           <CardContent className="pt-6">
             <div className="text-center">
               <p className="text-3xl font-bold">{roleCounts.ADMIN}</p>
-              <p className="text-sm text-red-100">Admin</p>
+              <p className="text-sm text-black">Admin</p>
             </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Filters */}
-      <Card className="shadow-lg shadow-gray-300/50 rounded-lg">
-        <CardHeader>
+      <Card className="rounded-lg">
+        <CardHeader className='flex flex-row items-center gap-2'>
+          <img src="/Vector-2.svg" alt="ค้นหาและกรอง" className='w-4 h-4' />
           <CardTitle>ค้นหาและกรอง</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -326,7 +338,7 @@ export default function AdminUsersPage() {
 
       {/* Edit Form Modal */}
       {showForm && editingUser && (
-        <Card className="border-2 border-blue-500 bg-blue-50">
+        <Card className="bg-blue-50">
           <CardHeader>
             <CardTitle>แก้ไขข้อมูล: {editingUser.firstName}</CardTitle>
           </CardHeader>
@@ -362,7 +374,7 @@ export default function AdminUsersPage() {
                 </div>
               </div>
               <div className="flex gap-2">
-                <Button type="submit">บันทึก</Button>
+                <Button type="submit" className='hover:bg-[#A4CBFF] text-black'>บันทึก</Button>
                 <Button type="button" variant="outline" onClick={() => {
                   setShowForm(false);
                   setEditingUser(null);
@@ -376,7 +388,7 @@ export default function AdminUsersPage() {
       )}
 
       {/* Users List */}
-      <Card className="shadow-lg shadow-gray-300/50 rounded-lg">
+      <Card className="rounded-lg">
         <CardHeader>
           <CardTitle>รายชื่อผู้ใช้ ({filteredUsers.length})</CardTitle>
         </CardHeader>
@@ -388,11 +400,10 @@ export default function AdminUsersPage() {
                 className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50"
               >
                 <div className="flex items-center gap-4">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold ${
-                    user.role === 'ADMIN' ? 'bg-red-500' :
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold ${user.role === 'ADMIN' ? 'bg-red-500' :
                     user.role === 'PM' ? 'bg-purple-500' :
-                    'bg-blue-500'
-                  }`}>
+                      'bg-blue-500'
+                    }`}>
                     {user.firstName.charAt(0)}
                   </div>
                   <div>
@@ -411,14 +422,13 @@ export default function AdminUsersPage() {
                   <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
                     {user.specialty}
                   </span>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    user.role === 'ADMIN' ? 'bg-red-100 text-red-800' :
+                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${user.role === 'ADMIN' ? 'bg-red-100 text-red-800' :
                     user.role === 'PM' ? 'bg-purple-100 text-purple-800' :
-                    'bg-green-100 text-green-800'
-                  }`}>
+                      'bg-green-100 text-green-800'
+                    }`}>
                     {user.role}
                   </span>
-                  
+
                   {user.role === 'STUDENT' && (
                     <Button
                       variant="outline"
@@ -428,15 +438,15 @@ export default function AdminUsersPage() {
                       <Calendar className="w-4 h-4" />
                     </Button>
                   )}
-                  
+
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => handleChangeRole(user.id, user.role, user.firstName)}
+                    onClick={() => handleChangeRole(user)}
                   >
                     <Shield className="w-4 h-4" />
                   </Button>
-                  
+
                   <Button
                     variant="outline"
                     size="sm"
@@ -517,11 +527,10 @@ export default function AdminUsersPage() {
                           {daySlots.map((slot, idx) => (
                             <div
                               key={idx}
-                              className={`p-3 rounded-lg border-l-4 ${
-                                slot.isFree
-                                  ? 'bg-green-50 border-green-500'
-                                  : 'bg-blue-50 border-blue-500'
-                              }`}
+                              className={`p-3 rounded-lg border-l-4 ${slot.isFree
+                                ? 'bg-green-50 border-green-500'
+                                : 'bg-blue-50 border-blue-500'
+                                }`}
                             >
                               <div className="flex items-center justify-between">
                                 <div>
@@ -532,11 +541,10 @@ export default function AdminUsersPage() {
                                     {slot.startTime} - {slot.endTime}
                                   </p>
                                 </div>
-                                <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                                  slot.isFree
-                                    ? 'bg-green-100 text-green-800'
-                                    : 'bg-blue-100 text-blue-800'
-                                }`}>
+                                <span className={`px-3 py-1 rounded-full text-xs font-medium ${slot.isFree
+                                  ? 'bg-green-100 text-green-800'
+                                  : 'bg-blue-100 text-blue-800'
+                                  }`}>
                                   {slot.isFree ? 'Available' : 'Busy'}
                                 </span>
                               </div>
@@ -548,6 +556,85 @@ export default function AdminUsersPage() {
                   })}
                 </div>
               )}
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Role Edit Modal */}
+      {showRoleModal && selectedRoleUser && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <Card className="w-full max-w-md">
+            <CardHeader className="border-b">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-2">
+                    <Shield className="w-5 h-5" />
+                    แก้ไขบทบาทผู้ใช้
+                  </CardTitle>
+                  <p className="text-sm text-gray-600 mt-1">
+                    {selectedRoleUser.firstName} • {selectedRoleUser.customId}
+                  </p>
+                </div>
+                <Button variant="outline" size="sm" onClick={closeRoleModal}>
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+            </CardHeader>
+
+            <CardContent className="pt-6 space-y-4">
+              <div>
+                <label className="text-sm font-medium block mb-2">บทบาทปัจจุบัน</label>
+                <div className="px-3 py-2 rounded-md bg-gray-100 text-sm font-medium">
+                  {selectedRoleUser.role}
+                </div>
+              </div>
+
+              <div>
+                <label className="text-sm font-medium block mb-2">เลือกบทบาทใหม่</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {(['STUDENT', 'PM', 'ADMIN'] as const).map((role) => (
+                    <button
+                      key={role}
+                      type="button"
+                      onClick={() => setNewRole(role)}
+                      className={`rounded-lg border px-3 py-3 text-sm font-medium transition ${newRole === role
+                          ? role === 'ADMIN'
+                            ? 'bg-red-500 text-white border-red-500'
+                            : role === 'PM'
+                              ? 'bg-purple-500 text-white border-purple-500'
+                              : 'bg-blue-500 text-white border-blue-500'
+                          : 'bg-white hover:bg-gray-50 border-gray-300'
+                        }`}
+                    >
+                      {role}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-lg bg-yellow-50 border border-yellow-200 p-3 text-sm text-yellow-800">
+                โปรดตรวจสอบให้แน่ใจก่อนเปลี่ยนบทบาท เพราะสิทธิ์การใช้งานในระบบจะเปลี่ยนตาม role ที่เลือก
+              </div>
+
+              <div className="flex justify-end gap-2 pt-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={closeRoleModal}
+                  disabled={changingRole}
+                >
+                  ยกเลิก
+                </Button>
+                <Button
+                  type="button"
+                  onClick={confirmChangeRole}
+                  disabled={changingRole || newRole === selectedRoleUser.role}
+                  className="text-black hover:bg-[#A4CBFF]"
+                >
+                  {changingRole ? 'กำลังบันทึก...' : 'บันทึกการเปลี่ยนแปลง'}
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>
