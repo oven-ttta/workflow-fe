@@ -145,14 +145,14 @@ export default function AdminProjectsPage() {
   }, {} as Record<string, number>);
 
   return (
-    <div className="space-y-6 bg-orange-50 p-6 rounded-lg shadow-md shadow-gray-400/50">
+    <div className="space-y-6 bg-orange-50 p-6 rounded-lg">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">จัดการโปรเจค</h1>
           <p className="text-gray-600 mt-1">สร้างและจัดการโปรเจคทั้งหมด</p>
         </div>
-        <Button className='bg-blue-500 shadow-lg shadow-gray-400/50' onClick={handleCreate}>
+        <Button className='bg-[#6AABFF]' onClick={handleCreate}>
           <Plus className="w-4 h-4 mr-2" />
           สร้างโปรเจคใหม่
         </Button>
@@ -160,7 +160,7 @@ export default function AdminProjectsPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-7 gap-3">
-        <Card className="bg-gradient-to-br from-orange-500 to-yellow-500 text-white shadow-lg shadow-gray-400/50 rounded-lg">
+        <Card className="bg-gradient-to-br from-[#0067EE] to-[#ADCBF2] text-white rounded-lg">
           <CardContent className="pt-4 text-center">
             <p className="text-2xl font-bold">{projects.length}</p>
             <p className="text-xs text-blue-100">ทั้งหมด</p>
@@ -177,10 +177,10 @@ export default function AdminProjectsPage() {
       </div>
 
       {/* Filters */}
-      <Card className='shadow-lg shadow-gray-300/50 rounded-lg'>
+      <Card className='rounded-lg'>
         <CardContent className="pt-6">
           <div className="flex flex-wrap gap-2">
-            <Button className='bg-gradient-to-br from-orange-500 to-yellow-500 shadow-lg shadow-gray-400/50'
+            <Button className='bg-gradient-to-br from-[#0067EE] to-[#ADCBF2]'
               variant={selectedFilter === 'ALL' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setSelectedFilter('ALL')}
@@ -298,9 +298,9 @@ export default function AdminProjectsPage() {
       {/* Projects List */}
       <div className="grid gap-4">
         {filteredProjects.length === 0 ? (
-          <Card className='shadow-lg shadow-gray-300/50 rounded-lg'>
+          <Card className='rounded-lg'>
             <CardContent className="text-center py-12">
-              <FolderKanban className="w-16 h-16 mx-auto mb-4 text-orange-500" />
+              {/* <FolderKanban className="w-16 h-16 mx-auto mb-4 text-[#0067EE]" /> */}
               <p className="text-gray-600">ไม่พบโปรเจค</p>
             </CardContent>
           </Card>
@@ -316,10 +316,10 @@ export default function AdminProjectsPage() {
                     <div className="flex-1">
                       <CardTitle className="text-xl mb-2">{project.projectName}</CardTitle>
                       <div className="flex flex-wrap gap-3 text-sm text-gray-600">
-                        <span>📊 ระดับ: {project.difficultyLevel}/5</span>
-                        <span>⏱️ {project.durationDays} วัน</span>
-                        <span>👥 {project.members.length} สมาชิก</span>
-                        <span>👨‍💼 PM: {project.pmUser?.firstName || 'ยังไม่มี'}</span>
+                        <span>ระดับ: {project.difficultyLevel}/5</span>
+                        <span>{project.durationDays} วัน</span>
+                        <span>{project.members.length} สมาชิก</span>
+                        <span>PM: {project.pmUser?.firstName || 'ยังไม่มี'}</span>
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">
