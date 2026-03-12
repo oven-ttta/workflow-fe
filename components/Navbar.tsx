@@ -93,7 +93,7 @@ export function Navbar() {
             <div className="flex text-sm justify-items-center items-center space-x-2">
               <p className="font-medium">{user.firstName}</p>
 
-              <Image src="./user-profile-icon.svg" alt="Avatar" width={32} height={32} className="rounded-full" />
+              <Image src="/user-profile-icon.svg" alt="Avatar" width={32} height={32} className="rounded-full" />
             </div>
 
             <Button className='bg-transparent hover:bg-red-500' size="sm" onClick={handleLogout}>
