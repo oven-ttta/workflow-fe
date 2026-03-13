@@ -248,37 +248,33 @@ export default function ProfilePage() {
           </form>
 
           {/* Footer Actions */}
-            <div className="flex flex-col md:flex-row gap-4 mt-12 items-center">
-              <div className="bg-[#FFFFFF] border border-gray-100 rounded-[20px] px-6 py-3 flex-1 w-full ">
-                <div className=''>
-                  <p className="text-[10px] text-gray-400 uppercase font-bold">อัปเดตล่าสุด</p>
-                  <p className="text-xs font-bold text-gray-600">
-                    {profile?.updatedAt ? new Date(profile.updatedAt).toLocaleString('th-TH') : '-'}
-                  </p>
-                </div>
-                
-              </div>
-              
-              <div className="flex gap-3 w-full md:w-auto bg-[#ffffff] mt-[-30px] rounded-[20px] px-6 py-3 rounded-tr-none rounded-tl-none">
-                <button 
-                  type="button"
-                  onClick={() => reset()}
-                  className="h-14 px-8 rounded-[20px] font-bold text-gray-500 hover:bg-gray-100 transition-colors border border-gray-300"
-                  disabled={isSaving}
-                >
-                  ยกเลิก
-                </button>
-                <Button 
-                  type="submit" 
-                  className="h-14 px-8 rounded-[20px] bg-[#FCC360] hover:bg-[#fbb33d] font-bold text-black shadow-md flex items-center gap-2"
-                  disabled={isSaving}
-                >
-                  <Save className="w-5 h-5" />
-                  {isSaving ? 'กำลังบันทึก...' : 'บันทึกการแก้ไข'}
-                </Button>
-              </div>
-            </div>
+<div className="flex flex-col md:flex-row gap-0 mt-0 items-stretch">
+  <div className="bg-white border border-gray-100 rounded-bl-[35px] px-6 py-4 flex-1">
+    <p className="text-[10px] text-gray-400 uppercase font-bold">อัปเดตล่าสุด</p>
+    <p className="text-xs font-bold text-gray-600">
+      {profile?.updatedAt ? new Date(profile.updatedAt).toLocaleString('th-TH') : '-'}
+    </p>
+  </div>
 
+  <div className="flex gap-3 bg-white px-6 py-4 rounded-br-[35px] items-center">
+    <button
+      type="button"
+      onClick={() => reset()}
+      className="h-14 px-8 rounded-[20px] font-bold text-gray-500 hover:bg-gray-100 transition-colors border border-gray-300"
+      disabled={isSaving}
+    >
+      ยกเลิก
+    </button>
+    <Button
+      type="submit"
+      className="h-14 px-8 rounded-[20px] bg-[#FCC360] hover:bg-[#fbb33d] font-bold text-black shadow-md flex items-center gap-2"
+      disabled={isSaving}
+    >
+      <Save className="w-5 h-5" />
+      {isSaving ? 'กำลังบันทึก...' : 'บันทึกการแก้ไข'}
+    </Button>
+  </div>
+</div>
         </div>
       </div>
     </div>
