@@ -28,7 +28,7 @@ export default function ProfilePage() {
     try {
       const data = await studentService.getProfile();
       setProfile(data);
-      
+
       // Set form values
       reset({
         firstName: data.firstName,
@@ -57,7 +57,7 @@ export default function ProfilePage() {
 
       const updatedProfile = await studentService.updateProfile(data);
       setProfile(updatedProfile);
-      
+
       // Update user info in cookies
       const user = authService.getCurrentUser();
       if (user) {
@@ -69,7 +69,7 @@ export default function ProfilePage() {
       }
 
       toast.success('บันทึกข้อมูลสำเร็จ!');
-      
+
       // Clear password field
       reset({
         ...data,
@@ -134,9 +134,8 @@ export default function ProfilePage() {
 
               <div className="space-y-2">
                 <p className="text-sm text-gray-400">สถานะ</p>
-                <div className={`w-full py-2 rounded-full text-center font-bold text-sm uppercase ${
-                  profile?.isActive ? 'bg-green-100 text-green-700' : 'bg-red-400 text-white'
-                }`}>
+                <div className={`w-full py-2 rounded-full text-center font-bold text-sm uppercase ${profile?.isActive ? 'bg-green-100 text-green-700' : 'bg-red-400 text-white'
+                  }`}>
                   {profile?.isActive ? 'ใช้งานอยู่' : 'ระงับ'}
                 </div>
               </div>
@@ -160,8 +159,8 @@ export default function ProfilePage() {
           </div>
 
           {/* ปุ่มออกจากระบบ */}
-          <button 
-            onClick={() =>  authService.logout()}
+          <button
+            onClick={() => authService.logout()}
             className="w-full bg-white h-16 rounded-[20px] shadow-sm flex items-center px-6 gap-4 hover:bg-gray-50 transition-colors"
           >
             <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
@@ -179,16 +178,16 @@ export default function ProfilePage() {
 
             {/* กล่องไฮไลท์สีเหลืองนวล */}
             <div className="bg-[#FFF3D6] rounded-[25px] w-full h-40 mb-8 flex items-center justify-center">
-               <Info className="text-orange-300 w-12 h-12" />
+              <Info className="text-orange-300 w-12 h-12" />
             </div>
 
             {/* Form Layout */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 flex-grow">
               <div className="space-y-2">
                 <label className="font-bold flex gap-1">ชื่อจริง <span className="text-red-500">*</span></label>
-                <Input 
+                <Input
                   {...register('firstName', { required: 'กรุณากรอกชื่อจริง' })}
-                  className="w-full h-12 border rounded-xl px-4" 
+                  className="w-full h-12 border rounded-xl px-4"
                   disabled={isSaving}
                 />
                 {errors.firstName && <p className="text-xs text-red-500">{errors.firstName.message}</p>}
@@ -196,16 +195,16 @@ export default function ProfilePage() {
 
               <div className="space-y-2">
                 <label className="font-bold flex gap-1">ชั้นปี <span className="text-red-500">*</span></label>
-                <Input 
+                <Input
                   {...register('yearLevel', { required: 'กรุณากรอกชั้นปี' })}
-                  className="w-full h-12 border rounded-xl px-4" 
+                  className="w-full h-12 border rounded-xl px-4"
                   disabled={isSaving}
                 />
               </div>
 
               <div className="space-y-2">
                 <label className="font-bold flex gap-1">ความถนัด <span className="text-red-500">*</span></label>
-                <select 
+                <select
                   {...register('specialty', { required: 'กรุณาเลือกความถนัด' })}
                   className="w-full h-12 border rounded-xl px-4 bg-gray-50/50 outline-none focus:ring-2 ring-orange-400"
                   disabled={isSaving}
@@ -219,9 +218,9 @@ export default function ProfilePage() {
 
               <div className="space-y-2">
                 <label className="font-bold flex gap-1">ชื่อผู้ใช้ <span className="text-red-500">*</span></label>
-                <Input 
+                <Input
                   {...register('username', { required: 'กรุณากรอกชื่อผู้ใช้' })}
-                  className="w-full h-12 border rounded-xl px-4" 
+                  className="w-full h-12 border rounded-xl px-4"
                   disabled={isSaving}
                 />
               </div>
@@ -230,51 +229,55 @@ export default function ProfilePage() {
                 <label className="font-bold flex items-center gap-2">
                   <Lock className="w-4 h-4" /> รหัสผ่าน <span className="text-red-500">*</span>
                 </label>
-                <Input 
+                <Input
                   {...register('password')}
-                  type="password" 
-                  placeholder="กรอกรหัสผ่านเพื่อยืนยัน" 
+                  type="password"
+                  placeholder="กรอกรหัสผ่านเพื่อยืนยัน"
                   className="w-full h-12 border rounded-xl px-4"
                   disabled={isSaving}
                 />
               </div>
               <p className="text-[10px] text-gray-400 flex items-center gap-1 uppercase font-bold mt-1">
-                  <Info className="w-3 h-5" />
-                  กรอกรหัสผ่านปัจจุบันเพื่อยืนยัน หรือกรอกรหัสผ่านใหม่ถ้าต้องการเปลี่ยน
-                </p>
+                <Info className="w-3 h-5" />
+                กรอกรหัสผ่านปัจจุบันเพื่อยืนยัน หรือกรอกรหัสผ่านใหม่ถ้าต้องการเปลี่ยน
+              </p>
             </div>
 
-            
+
           </form>
 
           {/* Footer Actions */}
-<div className="flex flex-col md:flex-row gap-0 mt-0 items-stretch">
-  <div className="bg-white border border-gray-100 rounded-bl-[35px] px-6 py-4 flex-1">
-    <p className="text-[10px] text-gray-400 uppercase font-bold">อัปเดตล่าสุด</p>
-    <p className="text-xs font-bold text-gray-600">
-      {profile?.updatedAt ? new Date(profile.updatedAt).toLocaleString('th-TH') : '-'}
-    </p>
-  </div>
+          <div className="flex flex-col md:flex-row gap-0 items-stretch">
 
-  <div className="flex gap-3 bg-white px-6 py-4 rounded-br-[35px] items-center">
-    <button
-      type="button"
-      onClick={() => reset()}
-      className="h-14 px-8 rounded-[20px] font-bold text-gray-500 hover:bg-gray-100 transition-colors border border-gray-300"
-      disabled={isSaving}
-    >
-      ยกเลิก
-    </button>
-    <Button
-      type="submit"
-      className="h-14 px-8 rounded-[20px] bg-[#FCC360] hover:bg-[#fbb33d] font-bold text-black shadow-md flex items-center gap-2"
-      disabled={isSaving}
-    >
-      <Save className="w-5 h-5" />
-      {isSaving ? 'กำลังบันทึก...' : 'บันทึกการแก้ไข'}
-    </Button>
-  </div>
-</div>
+            {/* Yellow info box — เพิ่ม concave corner ด้านบนซ้าย */}
+            <div className="relative bg-[#FCC360] rounded-tr-[25px] rounded-br-[25px] px-6 py-4 flex-1 mt-[30px] z-50">
+              <p className="text-[10px] text-gray-400 uppercase font-bold">อัปเดตล่าสุด</p>
+              <p className="text-xs font-bold text-gray-600">
+                {profile?.updatedAt ? new Date(profile.updatedAt).toLocaleString('th-TH') : '-'}
+              </p>
+            </div>
+
+            {/* White button bar — เพิ่ม concave corner รอยต่อกับ yellow (ด้านบนซ้าย) */}
+            <div className="relative flex gap-3 bg-white px-6 py-4 rounded-br-[25px] rounded-bl-[25px] items-center mt-7 before:absolute before:top-[-32] before:-left-6 before:w-16 before:h-6 before:shadow-[0_30px_0_0_white]">
+              <button
+                type="button"
+                onClick={() => reset()}
+                className="h-14 px-8 rounded-[20px] font-bold text-gray-500 hover:bg-gray-100 transition-colors border border-gray-300 z-50"
+                disabled={isSaving}
+              >
+                ยกเลิก
+              </button>
+              <Button
+                type="submit"
+                className="h-14 px-8 rounded-[20px] bg-[#FCC360] hover:bg-[#fbb33d] font-bold text-black shadow-md flex items-center gap-2"
+                disabled={isSaving}
+              >
+                <Save className="w-5 h-5" />
+                {isSaving ? 'กำลังบันทึก...' : 'บันทึกการแก้ไข'}
+              </Button>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
