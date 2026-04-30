@@ -251,10 +251,13 @@ export default function ProfilePage() {
 
             {/* Yellow info box — เพิ่ม concave corner ด้านบนซ้าย */}
             <div className="relative bg-[#FCC360] rounded-tr-[25px] rounded-br-[25px] px-6 py-4 flex-1 mt-[30px] z-50">
-              <p className="text-[10px] text-gray-400 uppercase font-bold">อัปเดตล่าสุด</p>
-              <p className="text-xs font-bold text-gray-600">
-                {profile?.updatedAt ? new Date(profile.updatedAt).toLocaleString('th-TH') : '-'}
-              </p>
+              <div className='bg-white p-4 rounded-[25px]'>
+                <p className="text-[10px] text-gray-400 uppercase font-bold">อัปเดตล่าสุด</p>
+                <p className="text-xs font-bold text-gray-600">
+                  {profile?.updatedAt ? new Date(profile.updatedAt).toLocaleString('th-TH') : '-'}
+                </p>
+              </div>
+
             </div>
 
             {/* White button bar — เพิ่ม concave corner รอยต่อกับ yellow (ด้านบนซ้าย) */}
