@@ -88,10 +88,10 @@ export default function LoginPage() {
               </Link>
             </div>
 
-            <div className="text-center text-xs text-gray-500 mt-4 p-3 bg-gray-50 rounded-md">
+            {/* <div className="text-center text-xs text-gray-500 mt-4 p-3 bg-gray-50 rounded-md">
               <p className="font-medium mb-1">บัญชีทดสอบ:</p>
               <p>Admin: admin / admin123</p>
-            </div>
+            </div> */}
           </form>
         </CardContent>
       </Card>
