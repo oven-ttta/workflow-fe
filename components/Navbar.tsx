@@ -79,7 +79,7 @@ export function Navbar() {
                     href={item.href}
                     className={`inline-flex items-center px-3 py-2 text-sm font-medium rounded-md m-2 ${isActive
                       ? 'text-black border border-black'
-                      : 'text-black hover:border-black hover:border'
+                      : 'text-black hover:border-black hover:ring-1 hover:ring-black'
                       }`}
                   >
                     <Icon className="w-4 h-4 mr-2" />
