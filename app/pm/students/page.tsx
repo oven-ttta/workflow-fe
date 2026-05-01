@@ -7,7 +7,7 @@ import { User, SPECIALTIES, TimeSlot } from '@/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Loading } from '@/components/ui/Loading';
-import { Users, Search, Filter, Calendar, X } from 'lucide-react';
+import { Users, Search, Filter, Calendar, X, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import toast from 'react-hot-toast';
 
@@ -17,6 +17,8 @@ export default function PMStudentsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>('ALL');
+  const [sortBy, setSortBy] = useState<string>('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [showTimetable, setShowTimetable] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState<User | null>(null);
   const [timetable, setTimetable] = useState<TimeSlot[]>([]);
@@ -28,7 +30,7 @@ export default function PMStudentsPage() {
 
   useEffect(() => {
     filterStudents();
-  }, [searchTerm, selectedSpecialty, students]);
+  }, [searchTerm, selectedSpecialty, students, sortBy, sortOrder]);
 
   const loadStudents = async () => {
     try {
@@ -57,6 +59,19 @@ export default function PMStudentsPage() {
         s.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
         s.customId.toLowerCase().includes(searchTerm.toLowerCase())
       );
+    }
+
+    // Sort
+    if (sortBy === 'name') {
+      filtered = [...filtered].sort((a, b) => {
+        const aName = a.firstName.toLowerCase();
+        const bName = b.firstName.toLowerCase();
+        if (sortOrder === 'asc') {
+          return aName.localeCompare(bName);
+        } else {
+          return bName.localeCompare(aName);
+        }
+      });
     }
 
     setFilteredStudents(filtered);
@@ -156,7 +171,7 @@ export default function PMStudentsPage() {
             <label className="text-sm font-medium mb-2 block">กรองตามความถนัด</label>
             <div className="flex flex-wrap gap-2">
               <Button
-              className='bg-orange-500 hover:bg-orange-600 shadow-gray-400/50'
+                className={selectedSpecialty === 'ALL' ? 'bg-orange-500 hover:bg-orange-600 shadow-gray-400/50' : ''}
                 variant={selectedSpecialty === 'ALL' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => handleSpecialtyFilter('ALL')}
@@ -166,6 +181,7 @@ export default function PMStudentsPage() {
               {SPECIALTIES.map((specialty) => (
                 <Button
                   key={specialty}
+                  className={selectedSpecialty === specialty ? 'bg-orange-500 hover:bg-orange-600 shadow-gray-400/50' : ''}
                   variant={selectedSpecialty === specialty ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => handleSpecialtyFilter(specialty)}
@@ -174,6 +190,46 @@ export default function PMStudentsPage() {
                 </Button>
               ))}
             </div>
+
+              <div>
+            <label className="text-sm font-medium mb-2 block">เรียงลำดับ</label>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                className={sortBy === '' ? 'bg-orange-500 hover:bg-orange-600 shadow-gray-400/50' : ''}
+                variant={sortBy === '' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSortBy('')}
+              >
+                <ArrowUpDown className="w-4 h-4 mr-2" />
+                ค่าเริ่มต้น
+              </Button>
+              <Button
+                className={sortBy === 'name' && sortOrder === 'asc' ? 'bg-orange-500 hover:bg-orange-600 shadow-gray-400/50' : ''}
+                variant={sortBy === 'name' && sortOrder === 'asc' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => {
+                  setSortBy('name');
+                  setSortOrder('asc');
+                }}
+              >
+                <ArrowUp className="w-4 h-4 mr-2" />
+                ชื่อ (A-Z)
+              </Button>
+              <Button
+                className={sortBy === 'name' && sortOrder === 'desc' ? 'bg-orange-500 hover:bg-orange-600 shadow-gray-400/50' : ''}
+                variant={sortBy === 'name' && sortOrder === 'desc' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => {
+                  setSortBy('name');
+                  setSortOrder('desc');
+                }}
+              >
+                <ArrowDown className="w-4 h-4 mr-2" />
+                ชื่อ (Z-A)
+              </Button>
+            </div>
+          </div>
+
           </div>
         </CardContent>
       </Card>
