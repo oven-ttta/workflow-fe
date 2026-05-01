@@ -11,12 +11,14 @@ import { Input } from '@/components/ui/Input';
 import { Loading } from '@/components/ui/Loading';
 import { User as UserIcon, Save, Lock, Info } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 export default function ProfilePage() {
   const [profile, setProfile] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const currentUser = authService.getCurrentUser();
+  const router = useRouter();
 
   const { register, handleSubmit, formState: { errors }, reset, watch } = useForm<RegisterRequest>();
 
@@ -82,6 +84,24 @@ export default function ProfilePage() {
       setIsSaving(false);
     }
   };
+
+  const save = handleSubmit(onSubmit);
+
+  const handleLogout = () => {
+    authService.logout();
+    toast.success('ออกจากระบบสำเร็จ');
+    router.push('/login');
+  };
+
+  const handleClear = () => {
+    reset({
+      firstName: profile?.firstName || '',
+      yearLevel: profile?.yearLevel || '',
+      specialty: profile?.specialty || '',
+      username: profile?.username || '',
+      password: ''
+    });
+  }
 
   if (isLoading) return <Loading />;
 
@@ -160,7 +180,7 @@ export default function ProfilePage() {
 
           {/* ปุ่มออกจากระบบ */}
           <button
-            onClick={() => authService.logout()}
+            onClick={handleLogout}
             className="w-full bg-white h-16 rounded-[20px] shadow-sm flex items-center px-6 gap-4 hover:bg-gray-50 transition-colors"
           >
             <svg className="w-6 h-6 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
@@ -270,7 +290,7 @@ export default function ProfilePage() {
               >
                 ยกเลิก
               </button>
-              <Button
+              <Button onClick={save}
                 type="submit"
                 className="h-14 px-8 rounded-[20px] bg-[#FCC360] hover:bg-[#fbb33d] font-bold text-black shadow-md flex items-center gap-2"
                 disabled={isSaving}
