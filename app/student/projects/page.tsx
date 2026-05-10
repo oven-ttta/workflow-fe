@@ -38,7 +38,7 @@ export default function StudentProjectsPage() {
         </div>
         <div className="flex-row ">
           <h2 className='text-2xl font-bold'>โปรเจคทั้งหมด</h2>
-          <h2 className='text-3xl font-bold flex justify-end'>xx</h2>
+          <h2 className='text-3xl font-bold flex justify-end'>{projects.length}</h2>
         </div>
       </div>
       
